@@ -1,0 +1,39 @@
+/* IMDX 2027 - contact information and supplied JIEXPO venue photo */
+.contact-info-section{background:#f9f0e2;padding:45px 0 0;}
+.contact-opening{max-width:1050px;margin:0 auto 58px;text-align:center;}
+.contact-overline,.contact-qr-eyebrow{display:block;color:var(--brand);font-size:12px;font-weight:700;letter-spacing:.12em;margin-bottom:17px;}
+.contact-opening h2{font-size:clamp(31px,3.9vw,52px);font-weight:700;line-height:1.15;color:var(--ink);margin:0 0 22px;letter-spacing:-.045em;}
+.contact-opening p{max-width:1040px;margin:0 auto;color:#514239;font-size:clamp(16px,1.5vw,20px);line-height:1.65;font-weight:400;}
+.contact-info-layout{display:grid;grid-template-columns:1.75fr .8fr;gap:24px;align-items:stretch;padding-bottom:76px;}
+.contact-info-cards{display:flex;flex-direction:column;gap:20px;}
+.contact-info-card{background:#fffdfb;border:1px solid #ecd5c2;border-radius:8px;display:grid;grid-template-columns:115px 1fr;gap:25px;padding:31px 35px;align-items:center;min-height:154px;}
+.contact-info-icon{width:88px;height:88px;border-right:1px solid #ecd5c2;display:flex;align-items:center;justify-content:center;color:var(--brand);padding-right:20px;}
+.contact-info-icon svg{width:46px;height:46px;}
+.contact-info-card h3{font-size:16px;font-weight:700;margin:0 0 8px;}
+.contact-info-card p{margin:0;font-size:17px;line-height:1.9;color:#342a24;font-weight:400;}
+.contact-info-card p span{display:inline-block;min-width:95px;color:#88584b;font-size:15px;}
+.contact-info-card a{color:var(--ink);text-decoration:underline;text-decoration-color:#e9cbbf;text-underline-offset:4px;}
+.contact-info-card a:hover{color:var(--brand);}
+.contact-feature-qr{background:#fffdfb;border:1px solid #ecd5c2;border-radius:8px;padding:30px 20px;min-height:328px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+.contact-feature-qr .contact-qr-eyebrow{font-size:10px;margin-bottom:17px;}
+.contact-feature-qr img{width:172px;height:172px;object-fit:contain;image-rendering:auto;padding:8px;background:#fff;border-radius:4px;}
+.contact-feature-qr h3{font-size:19px;font-weight:700;line-height:1.3;margin:12px 0 4px;}
+.contact-feature-qr p{font-size:12px;color:#88584b;margin:0;max-width:235px;}
+.contact-qr-band{background:#520f00;color:#fffbf5;padding:56px 0 70px;}
+.contact-qr-heading{text-align:center;margin-bottom:28px;}
+.contact-qr-heading span{font-size:11px;letter-spacing:.16em;color:#ffc5b4;font-weight:700;}
+.contact-qr-heading h2{color:#fffbf5;margin:8px 0 0;font-size:40px;}
+.contact-qr-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;max-width:860px;margin:0 auto;}
+.contact-qr-item{margin:0;text-align:center;}
+.contact-qr-image{background:white;border-radius:8px;width:196px;max-width:100%;margin:0 auto 17px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;padding:6px;}
+.contact-qr-image img{width:100%;height:100%;object-fit:contain;display:block;}
+.contact-qr-item figcaption{color:#fff;font-size:15px;line-height:1.45;font-weight:500;}
+.contact-reference-note{font-size:12px;color:#88584b;line-height:1.6;padding-top:18px;padding-bottom:30px;}
+.venue-photo{margin:0;position:relative;border-radius:8px;overflow:hidden;background:#efe5dc;min-width:0;}
+.venue-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.venue-photo figcaption{position:absolute;left:0;right:0;bottom:0;padding:34px 17px 12px;background:linear-gradient(transparent,rgba(0,0,0,.68));color:#fff;font-size:11px;font-weight:700;letter-spacing:.07em;}
+.venue-detail-top .venue-photo{height:340px;}
+.venue-section .venue-photo{height:400px;}
+@media(max-width:980px){.contact-info-layout{grid-template-columns:1.25fr .8fr;gap:18px;}.contact-info-card{grid-template-columns:84px 1fr;padding:23px;gap:16px;}.contact-info-icon{width:75px;height:75px;}.contact-info-card p{font-size:15px;}.contact-info-card p span{min-width:75px;}}
+@media(max-width:760px){.contact-info-layout{grid-template-columns:1fr;}.contact-feature-qr{min-height:270px;}.contact-info-card{grid-template-columns:78px 1fr;}.contact-qr-grid{gap:12px;}.contact-qr-image{width:165px;}.venue-detail-top .venue-photo,.venue-section .venue-photo{height:300px;}}
+@media(max-width:480px){.contact-opening{margin-bottom:30px;}.contact-info-card{grid-template-columns:1fr;gap:8px;padding:20px;}.contact-info-icon{justify-content:start;border-right:0;border-bottom:1px solid #ecd5c2;width:100%;height:55px;}.contact-info-icon svg{width:35px;height:35px;}.contact-info-card p{font-size:14px;}.contact-info-card p span{min-width:65px;}.contact-qr-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;}.contact-qr-image{width:100%;padding:4px;}.contact-qr-item figcaption{font-size:11px;}.contact-qr-heading h2{font-size:32px;}.venue-detail-top .venue-photo{height:250px;}.venue-section .venue-photo{height:265px;}.venue-photo figcaption{font-size:9px;}}
