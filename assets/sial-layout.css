@@ -1,0 +1,49 @@
+/* SIAL-inspired information architecture and editorial layout, with original IMDX design tokens. */
+html{scroll-padding-top:118px}body{background:var(--offwhite)}.page-frame{overflow:clip}
+.demo-ribbon{position:relative;z-index:122;height:30px;font-size:10px;letter-spacing:.09em}
+.site-nav-shell{position:sticky;top:0;z-index:120;background:rgba(255,253,251,.97);border-bottom:1px solid #e6dfd7;box-shadow:0 3px 14px rgba(42,30,21,.06);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.site-nav-shell .nav{height:85px;min-height:85px;max-width:1430px;width:calc(100% - 80px);margin:auto;gap:20px;position:relative;z-index:123}
+.site-nav-shell .brand{color:var(--ink)}.site-nav-shell .brand-mark{width:43px;height:43px}.site-nav-shell .brand-type strong{font-size:26px}
+.site-nav-shell .brand-type small{font-size:7px;letter-spacing:.095em}.site-nav-shell .nav-links{display:flex;align-items:stretch;gap:0;justify-content:flex-end;min-height:85px;margin-left:auto}
+.nav-menu{position:relative;display:flex;align-items:center}.nav-menu>a,.nav-menu>button{display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:700;color:#29221e;padding:18px 13px;height:100%;text-transform:uppercase;letter-spacing:.015em;background:transparent;border:0;white-space:nowrap}
+.nav-menu>a:hover,.nav-menu>button:hover,.nav-menu:focus-within>button,.nav-menu.is-open>button{color:var(--orange)}
+.nav-menu>button .caret{font-size:11px;line-height:1;transition:transform .2s}.nav-menu.is-open>button .caret{transform:rotate(180deg)}
+.nav-dropdown{position:absolute;left:0;top:calc(100% - 1px);min-width:246px;max-width:320px;display:flex;flex-direction:column;background:#fff;box-shadow:0 14px 30px rgba(49,24,14,.14);border-top:3px solid var(--brand);padding:10px;opacity:0;visibility:hidden;transform:translateY(7px);transition:opacity .18s,transform .18s,visibility .18s;z-index:131}
+.nav-menu:hover .nav-dropdown,.nav-menu:focus-within .nav-dropdown,.nav-menu.is-open .nav-dropdown{opacity:1;visibility:visible;transform:translateY(0)}
+.nav-dropdown a{padding:12px 14px;color:var(--ink);font-weight:500;font-size:14px;line-height:1.3;border-bottom:1px solid #f2ebe7}
+.nav-dropdown a:last-child{border:0}.nav-dropdown a:hover,.nav-dropdown a[aria-current=page]{color:var(--orange);background:#fff6ef}
+.site-nav-shell .nav-login{margin:auto 0 auto 13px;border-radius:4px;background:var(--orange);color:white;min-height:42px;padding:10px 14px;font-size:12px;border:1px solid var(--brand)}
+.site-nav-shell .nav-login:hover{background:var(--brand)}
+.site-nav-shell .nav-toggle{display:none;color:var(--ink)}
+.hero-shell{margin:18px 24px 0;min-height:630px}.hero-shell .hero-grid{min-height:555px}.hero-content h1{font-size:clamp(46px,5.5vw,88px)}
+.hero-shell .hero-bottom{min-height:66px}.section{padding-top:85px;padding-bottom:85px}
+.section-top{margin-bottom:35px}.section h2{font-size:clamp(38px,4.35vw,62px)}
+.site-nav-shell .brand:focus-visible,.nav-menu a:focus-visible,.nav-menu button:focus-visible{outline:3px solid var(--brand)}
+/* SIAL-esque flat, high-information article pages with generous white space */
+.detail-main{background:#fff;min-height:58vh}.detail-intro{max-width:1280px;width:calc(100% - 2*var(--space));margin:0 auto;padding:63px 0 20px}.breadcrumb{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--muted);margin-bottom:26px}.breadcrumb a{color:var(--brand)}.breadcrumb span{opacity:.5}
+.detail-intro h1{font-size:clamp(43px,4.1vw,64px);font-weight:700;color:#17120f;line-height:1.07;letter-spacing:-.045em;text-transform:uppercase;margin:0 0 13px}.detail-intro .detail-kicker{color:var(--brand);text-transform:uppercase;font-size:12px;letter-spacing:.12em;font-weight:700}
+.detail-main .section{padding-top:35px;padding-bottom:80px}.detail-main .section h2{font-size:clamp(36px,3.7vw,56px)}
+.detail-main .section-aside{font-size:11px}.detail-main .scope-section,.detail-main .conference-section,.detail-main .icee-news,.detail-main .icee-media,.detail-main .icee-partners{background:#fff}
+.detail-main .intro-section,.detail-main .visitor-section,.detail-main .venue-section{background:#fff}
+.detail-main .exhibitor-section{max-width:1280px}.detail-main .faq-section{padding-bottom:75px}
+.inner-divider{height:1px;background:#f0e9e2;max-width:1280px;margin:0 auto}
+/* Standalone venue page: informational columns, then gray address/map band */
+.venue-detail{padding:20px 0 0}.venue-detail-top{width:calc(100% - 2*var(--space));max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1.55fr .8fr;gap:52px;align-items:start;padding-bottom:65px}.venue-detail-main h2{font-size:clamp(26px,2.5vw,36px);font-weight:700;letter-spacing:-.045em;text-transform:uppercase;color:#17120f;line-height:1.14;margin:0 0 18px}.venue-detail-main h2 .accent-italic{font-weight:700;color:inherit}
+.venue-detail-main .lead{font-size:24px;font-weight:500;margin:12px 0 15px;color:var(--ink)}.venue-detail-main p:not(.lead){font-size:15px;line-height:1.8;color:#51453d;max-width:800px}.venue-detail-main .venue-date{max-width:420px;margin:20px 0 0}.venue-detail-top .venue-visual{min-height:315px;height:315px;border-radius:2px}
+.venue-detail-top .venue-visual svg{max-height:80%}.venue-map-band{background:#f5f5f5;padding:34px max(40px, calc((100vw - 1280px)/2)) 52px;display:grid;grid-template-columns:.35fr 1fr;gap:50px;align-items:start}
+.venue-map-info{font-size:15px;font-weight:400;color:#342b26;line-height:1.8}.venue-map-info strong{display:block;margin-bottom:10px;font-size:15px;color:#111}.venue-map-info p{margin:0 0 13px}.venue-map-info .btn{font-size:13px;min-height:38px;padding:10px 14px;margin-top:24px}
+.venue-map-frame{width:100%;height:385px;background:#e8e8e8;border:0;display:block;box-shadow:0 0 0 1px rgba(0,0,0,.05)}.venue-map-caption{font-size:11px;color:#746961;padding:10px 0 0}.venue-main-detail h1{margin-bottom:20px}
+.detail-main .icee-news .news-grid,.detail-main .icee-media .media-grid{margin-top:25px}
+/* Adapt links and CTAs for white editorial pages */
+.detail-main .section-top .dark-eyebrow{color:var(--brand)}.detail-main .venue-content h2{color:#1c1512}
+.site-bottom{background:#fbf7f1;padding-top:48px}.site-bottom .footer{padding-bottom:26px}
+@media (max-width:1100px){.site-nav-shell .nav{width:calc(100% - 36px)}.nav-menu>a,.nav-menu>button{font-size:12px;padding:14px 8px}.site-nav-shell .brand-type small{font-size:6px}.site-nav-shell .brand-type strong{font-size:24px}.site-nav-shell .nav-login{padding:9px 10px;margin-left:4px;font-size:11px}}
+@media (max-width:850px){
+ .site-nav-shell .nav{min-height:76px;height:76px;padding:0;width:calc(100% - 38px)}.site-nav-shell .nav-toggle{display:flex;flex-direction:column;gap:5px;border:1px solid #f0d8c5;border-radius:4px;background:#fff;align-items:center;justify-content:center;width:43px;height:43px;flex-shrink:0;margin-left:auto}.site-nav-shell .nav-toggle span{display:block;width:19px;height:2px;background:var(--ink)}
+ .site-nav-shell .nav-links{display:none;position:absolute;top:76px;left:-19px;right:-19px;min-height:auto;max-height:calc(100vh - 92px);overflow-y:auto;background:#fff;box-shadow:0 14px 35px rgba(30,18,10,.16);border-top:1px solid #eee1d6;padding:7px 16px 20px;margin:0;flex-direction:column;align-items:stretch;gap:0}.site-nav-shell .nav-links.open{display:flex}
+ .nav-menu{display:block}.nav-menu>a,.nav-menu>button{min-height:51px;width:100%;text-align:left;justify-content:space-between;padding:11px 12px;border-bottom:1px solid #f0ebe7;font-size:14px}
+ .nav-menu:hover .nav-dropdown,.nav-menu:focus-within .nav-dropdown{opacity:0;visibility:hidden;transform:none}.nav-menu.is-open .nav-dropdown{position:relative;top:auto;left:auto;min-width:0;max-width:none;display:flex;visibility:visible;opacity:1;transform:none;box-shadow:none;border-top:0;background:#fff9f4;padding:2px 8px 7px;margin:0 0 5px}.nav-menu.is-open .nav-dropdown a{padding:10px 17px;font-size:13px}.site-nav-shell .nav-login{margin:13px 10px 0;max-width:210px}
+ .hero-shell{margin:9px 12px 0}.hero-shell .hero-grid{min-height:630px}.detail-intro{padding:42px 0 15px}.venue-detail-top{grid-template-columns:1fr;gap:24px}.venue-detail-top .venue-visual{max-height:280px}.venue-map-band{padding:30px var(--space) 40px;grid-template-columns:1fr;gap:24px}.venue-map-frame{height:330px}
+}
+@media (max-width:560px){.site-nav-shell .brand-type strong{font-size:22px}.site-nav-shell .brand-type small{font-size:6px}.site-nav-shell .brand-mark{width:40px;height:40px}.detail-intro h1{font-size:42px}.venue-detail-main h2{font-size:24px}.venue-detail-top .venue-visual{min-height:235px;height:235px}.venue-map-frame{height:300px}.venue-detail-main .lead{font-size:20px}}
+@media (prefers-reduced-motion:reduce){.nav-dropdown{transition:none}}

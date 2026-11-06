@@ -1,33 +1,29 @@
-# IMDX 2027 — interactive concept preview
+# IMDX 2027 — Client presentation demo
 
-Client presentation prototype for **Indonesia Mining & Downstream Industries Exhibition 2027** (26–28 May 2027, JIEXPO Jakarta, Indonesia).
+Static website with SIAL-inspired **navigation and page information architecture**, retaining the existing IMDX copy, photographs, animated photo sequence, and mock registration/payment/QR demos.
 
-**This repository contains a demo, not an official exhibition registration platform.** Registration, booth requests, payment, and QR validation are simulated locally in the browser. Nothing is submitted, charged, saved to a server, or recognized for event admission.
+## Site map
 
-## What can visitors explore?
+- / — Home and complete overview
+- /about/ — About the exhibition
+- /exhibition/ — Exhibition Scope
+- /exhibitors/ — Exhibitor info / demo booth request
+- /visitors/ — Visitor info / sample registration and QR
+- /programme/ — Conferences and networking
+- /news/ — News section
+- /highlights/ — Images and illustrative motion photo sequence
+- /the-venue/ — JIEXPO venue and map
+- /partners/ — Organizers and partners
+- /contact/ — Contact overview
 
-- Responsive marketing homepage, exhibition scope, conference programs, venue, and FAQ.
-- Booth request concept with available size choices: 9, 18, 36, 72, 90, 108, 144, 180, and 240 m².
-- Participant registration, simulated checkout options, sample QR pass, participant dashboard, and simulated organizer check-in.
-- Adds an exhibition-style photo-led homepage, news editorial previews, programme overview, animated industry photo reel, visual gallery, and organizer information.\n- Retains the original brand-independent IMDX identity and the interactive visitor/exhibitor/QR concepts.\n- Uses licensed stock photos rather than reproducing images, logo assets or video footage from the reference website; see [MEDIA_CREDITS.md](MEDIA_CREDITS.md).
+All form submissions, checkout, QR passes and staff check-in are **client-side simulations only**: no backend, merchant integration, persisted personal data, ticket validity, or payment processing.
 
-## Run locally
+The design follows the user's requested navigation/layout reference while all substantive IMDX copy and imagery are retained from the previous demo. The embedded venue map is an added navigation aid (not original event footage).
 
-Open `index.html` or serve the folder with `python -m http.server 8000`. No `npm install`, database, or server configuration required.
+## GitHub Pages
 
-## Publish with GitHub Pages
+Serve from `main` / `/(root)` using repository Settings → Pages → Deploy from a branch. No build step.
 
-This is a static website; no GitHub Actions workflow, build step, or hosting subscription is needed.
+## Media
 
-1. Open repository **Settings → Pages**.
-2. Under **Build and deployment → Source**, select **Deploy from a branch**.
-3. Under **Branch**, select **`main`** and **`/(root)`**, then click **Save**.
-4. Once GitHub finishes publishing, open **https://saohdir.github.io/mining-expo-2027-demo/**.
-
-If the page initially shows 404, check the deployment status shown under Settings → Pages. The source file `index.html` is at the root of `main`.
-
-## Production considerations
-
-A real system will require a secure server, authentication, staff authorization, Midtrans merchant onboarding and webhook verification, unique signed QR tokens, event access control, and privacy/security reviews. The prototype implements **none** of these real-world services.
-
-Concept by Ridho Ariq Setyawan — Freelance Web Development.
+Industry stock photographs are illustrative, and the moving-media section is an animated photo sequence, **not genuine event video**. The site does not reproduce SIAL website text or images. See [MEDIA_CREDITS.md](MEDIA_CREDITS.md) in the repository.
