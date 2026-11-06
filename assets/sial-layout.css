@@ -47,3 +47,53 @@ html{scroll-padding-top:118px}body{background:var(--offwhite)}.page-frame{overfl
 }
 @media (max-width:560px){.site-nav-shell .brand-type strong{font-size:22px}.site-nav-shell .brand-type small{font-size:6px}.site-nav-shell .brand-mark{width:40px;height:40px}.detail-intro h1{font-size:42px}.venue-detail-main h2{font-size:24px}.venue-detail-top .venue-visual{min-height:235px;height:235px}.venue-map-frame{height:300px}.venue-detail-main .lead{font-size:20px}}
 @media (prefers-reduced-motion:reduce){.nav-dropdown{transition:none}}
+
+
+/* IMDX visual storytelling and viewport-centered modal – 2026-11-06 */
+/* Photo-forward presentation for the exhibition categories. */
+.industry-photo-grid{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:14px;margin:-5px 0 42px}
+.industry-photo-card{position:relative;isolation:isolate;margin:0;min-height:310px;border-radius:9px;overflow:hidden;background:#26323a;box-shadow:0 12px 34px rgba(19,24,30,.12)}
+.industry-photo-card img{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.9) contrast(1.06);transition:transform .55s ease,filter .55s ease}
+.industry-photo-card:hover img{transform:scale(1.045);filter:saturate(1.04) contrast(1.04)}
+.industry-photo-card:after{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,rgba(1,12,23,.04) 24%,rgba(2,12,20,.78) 100%)}
+.industry-photo-card figcaption{position:absolute;z-index:1;bottom:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:24px 20px;color:#fff;font-weight:700}
+.industry-photo-index{letter-spacing:.09em;font-size:12px}
+.industry-photo-arrow{display:grid;place-items:center;width:32px;height:32px;border:1px solid rgba(255,255,255,.56);border-radius:100%;font-size:18px}
+.industry-photo-feature{min-height:330px}
+.detail-main .scope-section .industry-photo-grid{margin-top:0}
+
+/* Exhibition application: replace flat illustration with a full-bleed mining image. */
+.exhibitor-section.container{max-width:1280px}
+.exhibitor-feature{display:grid;grid-template-columns:minmax(0,.87fr) minmax(0,1.13fr);gap:clamp(30px,5vw,78px);align-items:center}
+.exhibit-copy{min-width:0;padding:18px 0 20px}
+.exhibit-copy>.eyebrow{color:var(--brand);font-weight:700;font-size:12px;letter-spacing:.13em}
+.exhibit-copy h2{font-size:clamp(42px,4.6vw,69px);line-height:1.02;letter-spacing:-.06em;font-weight:500;margin:18px 0 26px}
+.exhibit-copy h2 em{font-style:normal;color:var(--brand);font-weight:300}
+.exhibit-copy>p{font-size:17px;line-height:1.75;max-width:500px;color:var(--muted);margin-bottom:30px}
+.booth-sample{display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;margin:0 0 25px}
+.booth-sample>span{font-size:11px;letter-spacing:.12em;font-weight:700;color:var(--muted)}
+.booth-sample>strong{font-size:24px;font-weight:700;color:var(--ink);white-space:nowrap}
+.booth-sample>small{flex-basis:100%;font-size:12px;color:var(--muted)}
+.exhibit-copy .btn-white{background:var(--orange);color:#fff;border:1px solid var(--orange);font-weight:600;padding:14px 24px}
+.exhibit-copy .btn-white:hover{background:#c43800}
+.exhibit-visual{min-width:0}
+.exhibit-visual-inner{position:relative;isolation:isolate;overflow:hidden;min-height:480px;border-radius:15px;background:#142b31;box-shadow:0 20px 45px rgba(31,37,40,.15)}
+.exhibit-visual-inner>img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(.95);transition:transform .7s ease}
+.exhibit-visual-inner:hover>img{transform:scale(1.035)}
+.exhibit-visual-inner:after{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,rgba(4,18,28,0) 35%,rgba(1,12,22,.77) 100%)}
+.exhibit-visual-inner>span{position:absolute;z-index:1;left:32px;bottom:27px;color:#fff;font-size:clamp(30px,3vw,46px);line-height:1.04;letter-spacing:-.05em;font-weight:600;text-shadow:0 2px 12px rgba(0,0,0,.25)}
+
+/* Modal is always centered in the visual viewport; only the content scrolls. */
+#modal.modal{position:fixed;inset:0;z-index:9999;padding:clamp(12px,2.5vh,24px);height:100vh;height:100dvh;overflow:hidden;align-items:center;justify-content:center;isolation:isolate}
+#modal.modal.is-open{display:flex}
+#modal .modal-backdrop{position:absolute;inset:0}
+#modal .modal-dialog{position:relative;z-index:2;display:flex;flex-direction:column;min-width:0;width:min(100%,760px);max-width:760px;max-height:calc(100vh - 24px);max-height:calc(100dvh - 2 * clamp(12px,2.5vh,24px));margin:0;overflow:hidden;background:var(--offwhite);border-radius:16px;box-shadow:0 25px 95px rgba(0,0,0,.38)}
+#modal .modal-head{display:flex;flex:0 0 auto;position:relative;top:auto;z-index:1;background:var(--offwhite);align-items:flex-start;padding:23px 30px 17px}
+#modal .modal-head h2{font-size:clamp(24px,3.4vw,38px);line-height:1.1;overflow-wrap:anywhere;margin:9px 0 0}
+#modal .modal-close{flex-shrink:0;min-height:40px;min-width:40px}
+#modal .modal-body{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:22px 30px 30px}
+#modal .form-field input,#modal .form-field select,#modal .form-field textarea{max-width:100%}
+@media(max-width:950px){.industry-photo-grid{grid-template-columns:1fr 1fr}.industry-photo-feature{grid-column:1/-1;min-height:270px}.industry-photo-card{min-height:225px}.exhibitor-feature{grid-template-columns:1fr 1fr;gap:30px}.exhibit-visual-inner{min-height:430px}}
+@media(max-width:700px){.industry-photo-grid{gap:10px;margin-bottom:30px}.industry-photo-card{min-height:180px}.industry-photo-feature{min-height:225px}.industry-photo-card figcaption{padding:15px 14px}.industry-photo-index{font-size:10px}.exhibitor-feature{grid-template-columns:1fr;gap:23px}.exhibit-copy{padding:0}.exhibit-copy h2{font-size:clamp(38px,9vw,55px)}.exhibit-visual-inner{min-height:365px}.exhibit-visual-inner>span{left:23px;bottom:22px;font-size:clamp(29px,7vw,39px)}#modal .modal-head{padding:18px 18px 14px}#modal .modal-body{padding:18px 18px 22px}#modal .form-grid{grid-template-columns:1fr;gap:13px}#modal .form-field.full{grid-column:auto}#modal .progress-steps{flex-wrap:wrap;gap:5px}#modal .progress-steps span{font-size:10px;padding:5px 9px}#modal .form-actions{gap:8px}#modal .form-actions button{max-width:100%}}
+@media(max-height:590px){#modal.modal{padding:8px}#modal .modal-dialog{max-height:calc(100vh - 16px);max-height:calc(100dvh - 16px)}#modal .modal-head{padding:12px 18px}#modal .modal-body{padding:15px 18px}#modal .modal-head h2{font-size:26px}}
+@media(prefers-reduced-motion:reduce){.industry-photo-card img,.exhibit-visual-inner>img{transition:none}}
