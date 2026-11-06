@@ -15,9 +15,16 @@ Client presentation prototype for **Indonesia Mining & Downstream Industries Exh
 
 Open `index.html` or serve the folder with `python -m http.server 8000`. No `npm install`, database, or server configuration required.
 
-## GitHub Pages
+## Publish with GitHub Pages
 
-This is a static website. GitHub Pages can serve it from `main` / root (Settings → Pages), or via the included Pages workflow if Pages Actions deployment is enabled on the repository.
+This is a static website; no GitHub Actions workflow, build step, or hosting subscription is needed.
+
+1. Open repository **Settings → Pages**.
+2. Under **Build and deployment → Source**, select **Deploy from a branch**.
+3. Under **Branch**, select **`main`** and **`/(root)`**, then click **Save**.
+4. Once GitHub finishes publishing, open **https://saohdir.github.io/mining-expo-2027-demo/**.
+
+If the page initially shows 404, check the deployment status shown under Settings → Pages. The source file `index.html` is at the root of `main`.
 
 ## Production considerations
 
