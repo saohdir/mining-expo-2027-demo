@@ -9,7 +9,7 @@ Client presentation prototype for **Indonesia Mining & Downstream Industries Exh
 - Responsive marketing homepage, exhibition scope, conference programs, venue, and FAQ.
 - Booth request concept with available size choices: 9, 18, 36, 72, 90, 108, 144, 180, and 240 m².
 - Participant registration, simulated checkout options, sample QR pass, participant dashboard, and simulated organizer check-in.
-- Follows the supplied warm orange/cream design system and original typography and layout inspiration.
+- Adds an exhibition-style photo-led homepage, news editorial previews, programme overview, animated industry photo reel, visual gallery, and organizer information.\n- Retains the original brand-independent IMDX identity and the interactive visitor/exhibitor/QR concepts.\n- Uses licensed stock photos rather than reproducing images, logo assets or video footage from the reference website; see [MEDIA_CREDITS.md](MEDIA_CREDITS.md).
 
 ## Run locally
 
