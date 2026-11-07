@@ -61,3 +61,54 @@
 }
 @media(max-width:480px){.about-stat-grid{grid-template-columns:1fr}.about-stat{padding:19px}.about-stat strong{font-size:25px}.about-market-image{min-height:250px;aspect-ratio:4/3}.about-market-description p{font-size:15px}.about-highlights-head{flex-direction:column;gap:4px}.about-highlights-map{grid-template-columns:1fr}.about-highlight-pin h3{font-size:15px}}
 @media(prefers-reduced-motion:reduce){.about-animate-enabled .about-reveal,.about-animate-enabled .about-highlight-pin.about-reveal,.about-animate-enabled .about-highlight-pin.about-reveal.about-revealed{transform:none!important;opacity:1!important;transition:none!important}.about-pin-disc,.about-highlight-pin h3{transition:none}.about-highlight-pin:hover .about-pin-disc{transform:none}}
+
+
+/* === About: Exhibition Overview — editorial and narrative refresh === */
+.interior-about .about-exhibition-overview{padding-top:48px;padding-bottom:77px}
+.interior-about .about-exhibition-overview .section-top{margin-bottom:36px}
+.interior-about .about-exhibition-grid{display:grid;grid-template-columns:minmax(0,.87fr) minmax(0,1.13fr);gap:clamp(28px,5.1vw,80px);align-items:start}
+.interior-about .about-exhibition-heading{min-width:0}
+.interior-about .about-exhibition-pretitle,.interior-about .about-exhibition-copy-kicker,.interior-about .about-exhibition-card-heading>div>span{display:block;color:#A6330C;font-size:11px;font-weight:700;letter-spacing:.125em;margin-bottom:17px}
+.interior-about .about-exhibition-grid h2{font:500 clamp(39px,4.1vw,60px)/1.065 "Space Grotesk",sans-serif;letter-spacing:-.06em;color:#520F00;margin:0 0 25px}
+.interior-about .about-exhibition-grid h2 .accent-italic{font-weight:300;color:#FF5912}
+.interior-about .about-exhibition-standfirst{max-width:435px;margin:0;font-size:clamp(18px,1.75vw,22px);line-height:1.48;color:#88584B;font-weight:400}
+.interior-about .intro-right.about-exhibition-copy{max-width:640px;padding:4px 0 0 25px;border-left:2px solid #FF5912}
+.interior-about .about-exhibition-copy-kicker{margin-bottom:13px}
+.interior-about .about-exhibition-copy h3{font:700 clamp(22px,2.25vw,30px)/1.2 "Space Grotesk",sans-serif;letter-spacing:-.045em;margin:0 0 20px;color:#520F00}
+.interior-about .intro-right.about-exhibition-copy p{font:400 15px/1.72 "Space Grotesk",sans-serif;margin:0 0 15px;color:#725042}
+.interior-about .about-exhibition-link{display:inline-flex!important;align-items:center;gap:19px;margin-top:9px!important;color:#A6330C;font-size:14px!important;font-weight:700;border-bottom:1px solid #FF5912;padding-bottom:6px}
+.interior-about .about-exhibition-facts{display:grid;grid-template-columns:1fr 1fr 1.34fr;gap:0;margin:39px 0 0;background:#FFF6EC;border:1px solid #ECD5C2;border-radius:10px;overflow:hidden}
+.interior-about .about-exhibition-fact{padding:22px 24px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.interior-about .about-exhibition-fact + .about-exhibition-fact{border-left:1px solid #ECD5C2}
+.interior-about .about-exhibition-fact span{font-size:11px;font-weight:700;color:#A6330C;letter-spacing:.105em}
+.interior-about .about-exhibition-fact strong{font-size:clamp(15px,1.45vw,19px);line-height:1.35;font-weight:600;color:#520F00;letter-spacing:-.025em}
+.interior-about .about-exhibition-overview .intro-showcase{margin-top:30px;height:clamp(290px,30vw,400px)}
+.interior-about .about-exhibition-card-heading{display:flex;align-items:end;justify-content:space-between;gap:35px;margin:46px 0 21px}
+.interior-about .about-exhibition-card-heading>div{max-width:600px}
+.interior-about .about-exhibition-card-heading>div>span{margin-bottom:9px}
+.interior-about .about-exhibition-card-heading h3{font:500 clamp(27px,3vw,39px)/1.1 "Space Grotesk",sans-serif;letter-spacing:-.055em;color:#520F00;margin:0}
+.interior-about .about-exhibition-card-heading h3 em{font-style:normal;color:#FF5912;font-weight:300}
+.interior-about .about-exhibition-card-heading>p{font-size:14px;line-height:1.6;color:#88584B;font-weight:400;max-width:350px;margin:0}
+.interior-about .intro-feature-grid{margin-top:0}
+.interior-about .intro-feature-card{background:#FFFDFB}
+@media(max-width:900px){
+ .interior-about .about-exhibition-grid{gap:28px;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}
+ .interior-about .intro-right.about-exhibition-copy{padding-left:18px}
+ .interior-about .about-exhibition-fact{padding:19px 16px}
+ .interior-about .about-exhibition-card-heading{gap:21px}
+}
+@media(max-width:700px){
+ .interior-about .about-exhibition-overview{padding-top:33px;padding-bottom:62px}
+ .interior-about .about-exhibition-overview .section-top{margin-bottom:25px}
+ .interior-about .about-exhibition-grid{grid-template-columns:1fr;gap:25px}
+ .interior-about .about-exhibition-grid h2{font-size:clamp(37px,9vw,52px);margin-bottom:16px}
+ .interior-about .about-exhibition-standfirst{font-size:18px;max-width:550px}
+ .interior-about .intro-right.about-exhibition-copy{max-width:none;padding:0 0 0 17px}
+ .interior-about .about-exhibition-facts{grid-template-columns:1fr;margin-top:28px}
+ .interior-about .about-exhibition-fact{padding:16px 20px;gap:5px}
+ .interior-about .about-exhibition-fact + .about-exhibition-fact{border-left:0;border-top:1px solid #ECD5C2}
+ .interior-about .about-exhibition-overview .intro-showcase{margin-top:25px;height:330px}
+ .interior-about .about-exhibition-card-heading{display:block;margin:37px 0 17px}
+ .interior-about .about-exhibition-card-heading>p{max-width:530px;margin:13px 0 0}
+}
+@media(max-width:480px){.interior-about .about-exhibition-overview .intro-showcase{height:330px}.interior-about .about-exhibition-grid h2{font-size:38px}.interior-about .about-exhibition-copy h3{font-size:24px}.interior-about .intro-right.about-exhibition-copy p{font-size:15px}}
