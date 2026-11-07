@@ -15,3 +15,12 @@ These are general industry photographs, **not photos of the IMDX event or any co
 
 ## Prior to live launch
 The organizer should supply the approved logo, original footage, official event photographs and image/video permissions, real exhibitors and sponsor logos, confirmed news updates, event floorplan, policies and venue/contact information. All registration/payment/QR experiences remain simulated in this public demo.
+
+## Exhibition overview layout: illustrative imagery
+The exhibition intro banner and three photo cards on the homepage and About page use general stock photographs, **not documentary photographs of IMDX 2027**. The photographs illustrate industry dialogue, professional attendance and processing technology.
+
+- Event audience / wide showcase and dialogue: [Unsplash photo](https://unsplash.com/photos/people-inside-white-room--GajrOEN6m4) and a previously supplied Unsplash conference image
+- Industry connections: [Product School — conference audience](https://unsplash.com/photos/people-inside-white-room--GajrOEN6m4)
+- Technology discovery: [TECNIC Bioprocess Solutions — technician working with equipment](https://unsplash.com/photos/a-man-works-on-industrial-machinery-xWUNZVW5JOg)
+
+Photo use is for a concept demo only; replace with organizer-approved event photography when available.

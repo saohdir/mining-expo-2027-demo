@@ -126,3 +126,39 @@ html{scroll-padding-top:118px}body{background:var(--offwhite)}.page-frame{overfl
 @media(max-width:980px){.conference-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.conference-grid .conference-card:last-child{grid-column:span 2}}
 @media(max-width:620px){.conference-grid{grid-template-columns:1fr}.conference-grid .conference-card:last-child{grid-column:auto}.conference-grid .conference-card h3{font-size:26px}.conference-grid .conference-card p{font-size:17px}.conference-card-content{padding:16px 3px 3px}}
 @media(prefers-reduced-motion:reduce){.conference-card-media img{transition:none}.conference-card:hover .conference-card-media img{transform:none}}
+
+
+/* IMDX Exhibition Intro — photo-led editorial layout matching approved reference */
+.intro-section .section-top{margin-bottom:45px}
+.intro-section .intro-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.96fr);align-items:start;gap:clamp(28px,6vw,90px)}
+.intro-section .intro-grid h2{font-family:"Space Grotesk",sans-serif;font-size:clamp(42px,4.8vw,69px);letter-spacing:-.06em;line-height:1.055;font-weight:500;margin:0}
+.intro-section .intro-right{max-width:610px;padding:2px 0 0}
+.intro-section .intro-right .lead{font-size:clamp(19px,2vw,24px);line-height:1.42;margin:0 0 20px}
+.intro-section .intro-right>p:not(.lead){font-size:16px;line-height:1.7;margin-bottom:13px}
+.intro-section .intro-right .text-link{margin-top:10px;font-size:15px}
+.intro-showcase{position:relative;overflow:hidden;isolation:isolate;margin:42px 0 0;height:clamp(285px,31vw,420px);border-radius:12px;background:#201713}
+.intro-showcase>img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 50%;filter:brightness(.8) saturate(.9);transition:transform .45s ease}
+.intro-showcase:hover>img{transform:scale(1.015)}
+.intro-showcase::after{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,rgba(25,9,3,.38),transparent 30%,rgba(25,9,3,.83) 100%);pointer-events:none}
+.intro-showcase-caption{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;justify-content:space-between;color:#fff;padding:17px 20px}
+.intro-showcase-location{align-self:flex-start;display:inline-flex;align-items:center;gap:7px;padding:8px 14px;background:#fff7ef;border-radius:100px;color:#895447;font-size:11px;font-weight:700;letter-spacing:.06em}
+.intro-showcase-dot{font-size:10px;color:#FF5912}
+.intro-showcase-bottom{display:flex;align-items:end;justify-content:space-between;gap:24px}
+.intro-showcase-copy{display:flex;flex-direction:column;gap:5px;min-width:0}
+.intro-showcase-copy small{font-weight:700;font-size:11px;letter-spacing:.045em;color:#FFC4A4}
+.intro-showcase-copy strong{font-weight:700;font-size:clamp(19px,2.2vw,30px);line-height:1.16;letter-spacing:-.035em;max-width:830px}
+.intro-showcase-badge{background:#FF5912;color:#fff;border-radius:4px;padding:9px 13px;flex:0 0 auto;font-size:11px;font-weight:700;white-space:nowrap}
+.intro-section .intro-feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:25px}
+.intro-section .intro-feature-card{min-width:0;min-height:0;display:flex;flex-direction:column;background:#FFFDFB;border:1px solid #ECD5C2;border-radius:10px;overflow:hidden;padding:14px 14px 13px}
+.intro-feature-media{position:relative;width:100%;aspect-ratio:1.72;overflow:hidden;border-radius:7px;background:#e8ded5}
+.intro-feature-media img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
+.intro-feature-card:hover .intro-feature-media img{transform:scale(1.045)}
+.intro-section .intro-feature-card .feature-index{position:absolute;left:12px;top:12px;z-index:1;padding:8px 12px;border-radius:100px;color:#915949;background:#FFF7EF;font-weight:700;font-size:11px;line-height:1;letter-spacing:.055em}
+.intro-feature-body{display:flex;flex-direction:column;flex:1;min-height:0;padding:18px 4px 3px}
+.intro-section .intro-feature-card h3{font-size:clamp(21px,2vw,27px);line-height:1.18;font-weight:700;letter-spacing:-.035em;color:#520F00;margin:0 0 12px}
+.intro-section .intro-feature-card p{font-size:15px;line-height:1.55;font-weight:300;color:#88584B;margin:0 0 17px}
+.intro-feature-link{margin:auto 0 0 auto;color:#FF5912;font-size:20px;line-height:1;border:1px solid transparent;border-radius:4px;width:33px;height:29px;display:flex;align-items:center;justify-content:center}
+.intro-feature-link:hover,.intro-feature-link:focus-visible{background:#FFF0E6;border-color:#ECD5C2}
+@media(max-width:900px){.intro-section .intro-grid{grid-template-columns:1fr 1fr;gap:30px}.intro-section .intro-right .lead{font-size:19px}.intro-showcase{height:350px}.intro-section .intro-feature-grid{gap:12px}.intro-section .intro-feature-card{padding:10px}.intro-feature-body{padding:15px 5px 2px}.intro-section .intro-feature-card h3{font-size:21px}}
+@media(max-width:700px){.intro-section .section-top{margin-bottom:27px}.intro-section .intro-grid{grid-template-columns:1fr;gap:24px}.intro-section .intro-grid h2{font-size:clamp(40px,10vw,60px)}.intro-section .intro-right{max-width:none}.intro-showcase{height:330px;margin-top:28px}.intro-showcase-caption{padding:14px}.intro-showcase-bottom{align-items:start;flex-direction:column;gap:14px}.intro-showcase-copy strong{font-size:23px}.intro-section .intro-feature-grid{grid-template-columns:1fr;gap:15px}.intro-feature-media{aspect-ratio:1.95}.intro-section .intro-feature-card{padding:12px}.intro-section .intro-feature-card h3{font-size:24px}.intro-feature-body{padding:15px 5px 4px}}
+@media(prefers-reduced-motion:reduce){.intro-showcase>img,.intro-feature-media img{transition:none}.intro-showcase:hover>img,.intro-feature-card:hover .intro-feature-media img{transform:none}}
