@@ -24,3 +24,6 @@ The exhibition intro banner and three photo cards on the homepage and About page
 - Technology discovery: [TECNIC Bioprocess Solutions — technician working with equipment](https://unsplash.com/photos/a-man-works-on-industrial-machinery-xWUNZVW5JOg)
 
 Photo use is for a concept demo only; replace with organizer-approved event photography when available.
+
+## Exhibition Showcase image — latest update
+The full-width *Exhibition Showcase* banner on the homepage and About page uses the audience photograph supplied by the website project owner. It is a concept preview image and is not presented as confirmed footage or photography of IMDX 2027. Orange light/shadow styling is applied through CSS, while the original photograph remains available as a local WebP asset.
