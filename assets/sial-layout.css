@@ -162,3 +162,7 @@ html{scroll-padding-top:118px}body{background:var(--offwhite)}.page-frame{overfl
 @media(max-width:900px){.intro-section .intro-grid{grid-template-columns:1fr 1fr;gap:30px}.intro-section .intro-right .lead{font-size:19px}.intro-showcase{height:350px}.intro-section .intro-feature-grid{gap:12px}.intro-section .intro-feature-card{padding:10px}.intro-feature-body{padding:15px 5px 2px}.intro-section .intro-feature-card h3{font-size:21px}}
 @media(max-width:700px){.intro-section .section-top{margin-bottom:27px}.intro-section .intro-grid{grid-template-columns:1fr;gap:24px}.intro-section .intro-grid h2{font-size:clamp(40px,10vw,60px)}.intro-section .intro-right{max-width:none}.intro-showcase{height:330px;margin-top:28px}.intro-showcase-caption{padding:14px}.intro-showcase-bottom{align-items:start;flex-direction:column;gap:14px}.intro-showcase-copy strong{font-size:23px}.intro-section .intro-feature-grid{grid-template-columns:1fr;gap:15px}.intro-feature-media{aspect-ratio:1.95}.intro-section .intro-feature-card{padding:12px}.intro-section .intro-feature-card h3{font-size:24px}.intro-feature-body{padding:15px 5px 4px}}
 @media(prefers-reduced-motion:reduce){.intro-showcase>img,.intro-feature-media img{transition:none}.intro-showcase:hover>img,.intro-feature-card:hover .intro-feature-media img{transform:none}}
+
+/* Tighten vertical rhythm between the exhibition intro cards and Exhibition Scope on homepage. */
+.intro-section + .scope-section{padding-top:58px}
+@media(max-width:700px){.intro-section + .scope-section{padding-top:48px}}
