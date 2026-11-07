@@ -27,3 +27,13 @@ Photo use is for a concept demo only; replace with organizer-approved event phot
 
 ## Exhibition Showcase image — latest update
 The full-width *Exhibition Showcase* banner on the homepage and About page uses the audience photograph supplied by the website project owner. It is a concept preview image and is not presented as confirmed footage or photography of IMDX 2027. Orange light/shadow styling is applied through CSS, while the original photograph remains available as a local WebP asset.
+
+## User-supplied images in “Where possibility meets progress” (November 2026)
+The four local WebP files used for the exhibition introduction on the homepage and About page are optimized from images supplied by the project owner. Their filenames and placements are:
+
+- `assets/where-progress-hero.webp` — opening-ceremony speaker and audience in the full-width exhibition banner
+- `assets/where-progress-connect.webp` — exhibitor/business interaction in Industry connections
+- `assets/where-progress-discover.webp` — equipment demonstration in Technology discovery
+- `assets/where-progress-dialogue.webp` — panel discussion in Strategic dialogue
+
+The source files belong to the project materials supplied for this concept. Their event date, provenance and publication permissions have not been independently verified. These images do not establish that an IMDX 2027 event has already occurred.
