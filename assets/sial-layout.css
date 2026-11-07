@@ -107,3 +107,22 @@ html{scroll-padding-top:118px}body{background:var(--offwhite)}.page-frame{overfl
 @media(max-width:1100px){.site-nav-shell .official-brand-logo{width:140px;height:54px}}
 @media(max-width:850px){.site-nav-shell .official-brand-logo{width:145px;height:55px}}
 @media(max-width:480px){.site-nav-shell .official-brand-logo{width:132px;height:51px}.footer .brand.official-brand{width:132px;max-width:132px}.footer .brand.official-brand .official-brand-logo{width:132px;height:51px;max-width:132px;max-height:51px;flex-basis:132px}}
+
+
+/* Photo-led programme cards / Valid design tokens */
+.conference-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
+.conference-grid .conference-card{min-width:0;min-height:0;display:flex;flex-direction:column;padding:14px;background:#FFFDFB;border:2px solid #ECD5C2;border-radius:8px;overflow:hidden;font-family:'Space Grotesk',sans-serif}
+.conference-card-media{width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:6px;background:#e8ded5}
+.conference-card-media img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .3s ease}
+.conference-card:hover .conference-card-media img{transform:scale(1.035)}
+.conference-card-content{display:flex;flex:1;flex-direction:column;padding:18px 5px 5px;min-width:0}
+.conference-grid .conference-card-head{margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12px;letter-spacing:.04em}
+.conference-grid .conference-card-head .tag{color:#520F00;background:#ECD5C2;padding:6px 10px;border-radius:4px;font-weight:500}
+.conference-grid .conference-card h3{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:#520F00;line-height:1.15;letter-spacing:-.045em;margin:0 0 15px}
+.conference-grid .conference-card p{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:300;line-height:1.5;color:#88584B;margin:0 0 25px}
+.conference-grid .conference-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:18px;border-top:1px solid #ECD5C2;font-size:11px;font-weight:500;color:#88584B;letter-spacing:.06em}
+.conference-grid .conference-foot button{display:inline-flex;align-items:center;justify-content:center;flex:0 0 43px;width:43px;height:43px;border:1px solid #ECD5C2;border-radius:4px;background:#FFFDFB;color:#FF5912;font-size:25px}
+.conference-grid .conference-foot button:hover{border-color:#FF5912;background:#FFF1E7}
+@media(max-width:980px){.conference-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.conference-grid .conference-card:last-child{grid-column:span 2}}
+@media(max-width:620px){.conference-grid{grid-template-columns:1fr}.conference-grid .conference-card:last-child{grid-column:auto}.conference-grid .conference-card h3{font-size:26px}.conference-grid .conference-card p{font-size:17px}.conference-card-content{padding:16px 3px 3px}}
+@media(prefers-reduced-motion:reduce){.conference-card-media img{transition:none}.conference-card:hover .conference-card-media img{transform:none}}
