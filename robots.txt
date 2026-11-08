@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /account
+Disallow: /admin
+Disallow: /api/
+Allow: /
+Sitemap: https://uat.imdx.tech/sitemap.xml

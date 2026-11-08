@@ -36,3 +36,4 @@
 .hero-countdown{font-variant-numeric:tabular-nums}
 .cms-news time{font-size:.8em;opacity:.75}.cms-news h3{margin:.2em 0}
 .cms-gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px}
+.breadcrumb ol{list-style:none;display:flex;gap:6px;padding:12px 0;margin:0;font-size:.85rem}.breadcrumb li+li::before{content:"›";margin-right:6px;opacity:.6}

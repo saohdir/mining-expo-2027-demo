@@ -7,6 +7,11 @@
  const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
  const lang=(document.documentElement.lang||"en").startsWith("id")?"id":"en";
 
+ // FR-001: breadcrumb on inner pages (Home › Page).
+ const main=document.querySelector("main");
+ if(main&&location.pathname.replace(/\/$/,"")&&!document.querySelector("nav.breadcrumb")){const h=document.querySelector("main h1");if(h){const nav=document.createElement("nav");nav.className="breadcrumb container";nav.setAttribute("aria-label","Breadcrumb");
+  nav.innerHTML=`<ol><li><a href="/">${lang==="id"?"Beranda":"Home"}</a></li><li aria-current="page">${esc(h.textContent.trim().slice(0,80))}</li></ol>`;main.prepend(nav)}}
+
  // FR-030: keep UTM attribution for the session (non-sensitive).
  try{const q=new URLSearchParams(location.search);const utm={};["utm_source","utm_medium","utm_campaign"].forEach(k=>{const v=q.get(k);if(v)utm[k]=v.slice(0,100)});if(Object.keys(utm).length)sessionStorage.setItem("imdx-utm",JSON.stringify(utm))}catch{}
  const utm=()=>{try{return JSON.parse(sessionStorage.getItem("imdx-utm")||"{}")}catch{return {}}};
