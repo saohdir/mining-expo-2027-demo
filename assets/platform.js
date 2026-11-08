@@ -5,7 +5,15 @@
  const onPreview=location.hostname.endsWith("github.io")||location.protocol==="file:";
  const api=(window.IMDX_UAT_BASE_URL&&/^https:\/\//.test(window.IMDX_UAT_BASE_URL)?window.IMDX_UAT_BASE_URL.replace(/\/$/,""):"")+"/api/public";
  const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
- const lang=(document.documentElement.lang||"en").startsWith("id")?"id":"en";
+ // FR-001/NFR-09 language preference: ?lang=id|en, remembered per browser; CMS serves ID layouts with EN fallback.
+ const langParam=new URLSearchParams(location.search).get("lang");
+ try{if(langParam==="id"||langParam==="en")localStorage.setItem("imdx-lang",langParam)}catch{}
+ let stored=null;try{stored=localStorage.getItem("imdx-lang")}catch{}
+ const lang=(stored||document.documentElement.lang||"en").startsWith("id")?"id":"en";
+ document.documentElement.lang=lang;
+ (()=>{const nav=document.getElementById("navLinks");if(!nav||document.querySelector(".lang-switch"))return;const w=document.createElement("div");w.className="lang-switch";w.setAttribute("role","group");w.setAttribute("aria-label","Language");
+  ["en","id"].forEach(code=>{const b=document.createElement("button");b.type="button";b.textContent=code.toUpperCase();b.setAttribute("aria-pressed",String(code===lang));b.lang=code;b.title=code==="en"?"English":"Bahasa Indonesia";
+   b.addEventListener("click",()=>{try{localStorage.setItem("imdx-lang",code)}catch{}const u=new URL(location.href);u.searchParams.delete("lang");location.assign(u.toString())});w.append(b)});nav.append(w)})();
 
  // FR-001: breadcrumb on inner pages (Home › Page).
  const main=document.querySelector("main");
