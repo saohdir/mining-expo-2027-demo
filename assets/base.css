@@ -34,3 +34,5 @@
 .cms-list{list-style:none;padding:0;display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
 .cms-partner img{max-width:160px;max-height:80px;object-fit:contain;display:block}.cms-partner span{display:block;font-size:.85em;opacity:.8}
 .hero-countdown{font-variant-numeric:tabular-nums}
+.cms-news time{font-size:.8em;opacity:.75}.cms-news h3{margin:.2em 0}
+.cms-gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px}
