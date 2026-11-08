@@ -31,7 +31,7 @@
  // FR-005/009/035: published CMS items replace static fallbacks; drafts never reach the browser.
  // FR-017: partnership CTA preselects the enquiry topic on the contact page.
  const topic=new URLSearchParams(location.search).get("topic");
- document.querySelectorAll("[data-cms-kind]").forEach(async box=>{
+ const renderList=async box=>{
   if(onPreview)return;
   try{const r=await fetch(`${api}/content?kind=${encodeURIComponent(box.dataset.cmsKind)}&locale=${lang}`);if(!r.ok)return;const {items}=await r.json();if(!items?.length)return;
    const kind=box.dataset.cmsKind;
@@ -41,7 +41,8 @@
     :`<li class="cms-partner">${i.imageUrl?`<img src="${esc(i.imageUrl)}" alt="${esc(i.altText||i.title)}" loading="lazy">`:""}<strong>${esc(i.title)}</strong>${i.role?`<span>${esc(i.role)}</span>`:""}${i.summary?`<p>${esc(i.summary)}</p>`:""}</li>`).join("");
    box.hidden=false;box.closest("[data-cms-section]")?.removeAttribute("hidden");
   }catch{}
- });
+ };
+ document.querySelectorAll("[data-cms-kind]").forEach(renderList);
 
  // FR-010/024/026/027: contact & partnership form → lead inbox (consent required, honeypot, server validation).
  const host=document.getElementById("imdx-contact-form");
@@ -103,4 +104,46 @@
   [...new Set(items.map(i=>day(i.startsAt)))].sort().forEach(d=>sel.add(new Option(new Date(d+"T00:00:00+07:00").toLocaleDateString(lang==="id"?"id-ID":"en-GB",{dateStyle:"full",timeZone:"Asia/Jakarta"}),d)));
   const render=()=>{ul.innerHTML=items.filter(i=>!sel.value||day(i.startsAt)===sel.value).sort((a,b)=>a.startsAt.localeCompare(b.startsAt)).map(i=>`<li><time>${new Date(i.startsAt).toLocaleTimeString("en-GB",{timeZone:"Asia/Jakarta",hour:"2-digit",minute:"2-digit"})} WIB</time> <strong>${esc(i.title)}</strong></li>`).join("")};
   sel.addEventListener("change",render);render();sched.hidden=false}catch{}})()}
+
+ // CMS pages & layout: published layout (or staff draft preview) reorders/hides designed sections and adds blocks.
+ // Content is inserted as TEXT only (no HTML from the CMS), links limited to site paths/https/mailto.
+ (async()=>{
+  const key=document.body.dataset.cmsPage;if(!key||onPreview)return;
+  const preview=new URLSearchParams(location.search).get("cmsPreview")==="1";
+  let layout=null;
+  try{
+   if(preview){const r=await fetch(`${api.replace(/\/public$/,"/admin")}/pages/${key}?locale=${lang}`,{credentials:"same-origin",cache:"no-store"});if(r.ok)layout=(await r.json()).draft;
+    const bar=document.createElement("div");bar.className="cms-preview-bar";bar.setAttribute("role","status");bar.textContent=r.ok?"PREVIEW — unpublished draft (only visible to signed-in CMS staff)":"Preview needs a CMS sign-in.";document.body.prepend(bar)}
+   else{const r=await fetch(`${api}/pages/${key}?locale=${lang}`);if(r.ok)layout=(await r.json()).layout}
+  }catch{}
+  if(!layout||!Array.isArray(layout.blocks))return;
+  if(layout.seo?.title)document.title=layout.seo.title;
+  if(layout.seo?.description){let m=document.querySelector('meta[name="description"]');if(!m){m=document.createElement("meta");m.name="description";document.head.append(m)}m.content=layout.seo.description}
+  const safe=u=>typeof u==="string"&&(/^\/[A-Za-z0-9/_\-.#?=&%]*$/.test(u)||/^https:\/\//.test(u)||/^mailto:/.test(u))?u:"";
+  const el=(tag,cls,txt)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(txt)e.textContent=txt;return e};
+  const para=(body)=>{const f=document.createDocumentFragment();String(body||"").split(/\n\s*\n/).forEach(chunk=>{const lines=chunk.split("\n");if(lines.every(l=>/^\s*-\s+/.test(l))){const ul=el("ul");lines.forEach(l=>ul.append(el("li","",l.replace(/^\s*-\s+/,""))));f.append(ul)}else if(chunk.trim())f.append(el("p","",chunk.trim()))});return f};
+  const link=(href,label,cls)=>{const a=el("a",cls||"btn btn-orange",label);a.href=safe(href)||"#";return a};
+  const img=(u,alt)=>{if(!safe(u))return null;const i=el("img");i.src=safe(u);i.alt=alt||"";i.loading="lazy";return i};
+  const render=b=>{const d=b.data||{},sec=el("section","container section cms-block cms-block-"+b.type);sec.dataset.cmsCustom=b.id;
+   if(b.type==="hero"){if(d.eyebrow)sec.append(el("span","eyebrow",d.eyebrow));if(d.title)sec.append(el("h2","",d.title));if(d.subtitle)sec.append(el("p","",d.subtitle));const i=img(d.imageUrl,d.imageAlt);if(i)sec.append(i);if(d.ctaLabel)sec.append(link(d.ctaHref,d.ctaLabel))}
+   else if(b.type==="text"){if(d.eyebrow)sec.append(el("span","eyebrow",d.eyebrow));if(d.heading)sec.append(el("h2","",d.heading));sec.append(para(d.body))}
+   else if(b.type==="cards"){if(d.heading)sec.append(el("h2","",d.heading));const ul=el("ul","cms-list");(d.items||[]).forEach(it=>{const li=el("li","cms-partner");const i=img(it.imageUrl,it.imageAlt);if(i)li.append(i);const t=el("strong","",it.title);if(safe(it.href)){const a=el("a");a.href=safe(it.href);a.append(t);li.append(a)}else li.append(t);if(it.text)li.append(el("p","",it.text));ul.append(li)});sec.append(ul)}
+   else if(b.type==="cta"){if(d.heading)sec.append(el("h2","",d.heading));if(d.text)sec.append(el("p","",d.text));if(d.buttonLabel)sec.append(link(d.buttonHref,d.buttonLabel))}
+   else if(b.type==="image"){const fig=el("figure");const i=img(d.imageUrl,d.imageAlt);if(i)fig.append(i);if(d.caption)fig.append(el("figcaption","",d.caption));sec.append(fig)}
+   else if(b.type==="stats"){if(d.heading)sec.append(el("h2","",d.heading));const dl=el("dl","cms-stats");(d.items||[]).forEach(it=>{const w=el("div");w.append(el("dt","",it.label),el("dd","",it.value));dl.append(w)});sec.append(dl)}
+   else if(b.type==="faq"){if(d.heading)sec.append(el("h2","",d.heading));(d.items||[]).forEach(it=>{const det=el("details");det.append(el("summary","",it.q),el("p","",it.a));sec.append(det)})}
+   else if(b.type==="list"){if(d.heading)sec.append(el("h2","",d.heading));const ul=el("ul","cms-list");ul.dataset.cmsKind=d.kind;ul.hidden=true;sec.append(ul);renderList(ul)}
+   return sec};
+  const container=document.querySelector("main")||document.body;
+  const listed=new Set();
+  for(const b of layout.blocks){
+   if(b.type==="static"){const node=document.querySelector(`[data-cms-block="${CSS.escape(b.ref)}"]`);if(!node)continue;listed.add(node);node.hidden=!!b.hidden;
+    if(node.hidden)node.style.display="none";else node.style.removeProperty("display");
+    if(node.parentElement===container||container.contains(node))container.append(node)}
+   else if(!b.hidden)container.append(render(b));
+  }
+  document.querySelectorAll("[data-cms-block]").forEach(n=>{if(!listed.has(n)){n.hidden=true;n.style.display="none"}});
+  const footerNodes=[...container.querySelectorAll(":scope > footer")];footerNodes.forEach(f=>container.append(f));
+  document.documentElement.dataset.cmsLayout=preview?"draft":"published";
+ })();
 })();
