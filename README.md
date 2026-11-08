@@ -1,29 +1,25 @@
-# IMDX 2027 — Client presentation demo
+# IMDX 2027 — Public Marketing Frontend (Pre-Go-Live UAT)
 
-Static website with SIAL-inspired **navigation and page information architecture**, retaining the existing IMDX copy, photographs, animated photo sequence, and mock registration/payment/QR demos.
+This repository holds the IMDX 2027 **public marketing pages, photography, logos, and editorial content**. It is no longer a mocked registration / QR / payment demo.
 
-## Site map
+The companion [mining-expo-2027-backend](https://github.com/saohdir/mining-expo-2027-backend) implements the dynamic UAT customer account, booking, manual invoice/payment, CMS, booth floorplan and QR scanner.
 
-- / — Home and complete overview
-- /about/ — About the exhibition
-- /exhibition/ — Exhibition Scope
-- /exhibitors/ — Exhibitor info / demo booth request
-- /visitors/ — Visitor info / sample registration and QR
-- /programme/ — Conferences and networking
-- /news/ — News section
-- /highlights/ — Images and illustrative motion photo sequence
-- /the-venue/ — JIEXPO venue and map
-- /partners/ — Organizers and partners
-- /contact/ — Contact overview
+**Deployment model:** The HTML in this repo should be mounted as the public website at `/` and the Next.js app at `/account`, `/admin` and `/api` on the **same UAT HTTPS domain**, following the backend's `docs/UAT_DEPLOYMENT.md`.
 
-All form submissions, checkout, QR passes and staff check-in are **client-side simulations only**: no backend, merchant integration, persisted personal data, ticket validity, or payment processing.
+**Important:** The existing [GitHub Pages site](https://saohdir.github.io/mining-expo-2027-demo/) is only a *static design/content preview*. Account buttons cannot actually register users or process payments there. Those functions require a configured dynamic server and PostgreSQL with valid SMTP/SMS settings. The UAT environment has NOT been deployed from this repository.
 
-The design follows the user's requested navigation/layout reference while all substantive IMDX copy and imagery are retained from the previous demo. The embedded venue map is an added navigation aid (not original event footage).
+## Monetary and admission policy
 
-## GitHub Pages
+- **No Midtrans, QRIS or automatic payment gateway**. Finance verifies organizer-issued manual bank transfers.
+- No payment form, customer database, or QR scanner is served by GitHub Pages.
+- Each exhibitor booth request specifies preferred units and custom m² but is not an automatic hold or assignment.
+- Real attendee QR verification happens exclusively in the authenticated CMS.
+- Public UAT registration remains disabled until organizer sign-off; don't add fake payment/QR modals.
 
-Serve from `main` / `/(root)` using repository Settings → Pages → Deploy from a branch. No build step.
+## Content pages
 
-## Media
+Home; About Exhibition; Exhibition Scope; Why Exhibit; Visitor Information; Conferences & Networking; News; Photo Highlights; Venue; Organizers & Partners; Contact.
 
-Industry stock photographs are illustrative, and the moving-media section is an animated photo sequence, **not genuine event video**. The site does not reproduce SIAL website text or images. See [MEDIA_CREDITS.md](MEDIA_CREDITS.md) in the repository.
+All event content, images and brand-use permissions must be reviewed before go-live. See [MEDIA_CREDITS.md](MEDIA_CREDITS.md).
+
+Repository slug `mining-expo-2027-demo` is retained for continuity with past links; the website is intended as a source component for the actual IMDX UAT platform.
