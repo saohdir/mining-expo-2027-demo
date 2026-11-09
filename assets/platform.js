@@ -22,6 +22,15 @@
   [["en","EN","English"],["zh","中文","简体中文"]].forEach(([code,label,title])=>{const b=document.createElement("button");b.type="button";b.textContent=label;b.setAttribute("aria-pressed",String(code===lang));b.lang=code==="zh"?"zh-Hans":"en";b.title=title;
    b.addEventListener("click",()=>{try{localStorage.setItem("imdx-lang",code)}catch{}const u=new URL(location.href);u.searchParams.delete("lang");const base=enPath(u.pathname);u.pathname=code==="zh"?"/zh"+(base==="/"?"/":base):base;location.assign(u.toString())});w.append(b)});nav.append(w)})();
 
+ // CR-LANG-01: page-title header of the inner pages (outside the CMS sections) in Chinese.
+ if(lang==="zh"){const T={"HOME":"首页","ABOUT THE EXHIBITION":"关于展会","Event information":"展会信息","CONTACT US":"联系我们","Exhibition coordination":"展会联络",
+  "EXHIBITION SCOPE":"展览范围","Industry sectors":"行业领域","WHY EXHIBIT":"为何参展","Exhibitor information":"参展商信息","PHOTO & MOTION HIGHLIGHTS":"精彩图片与视频",
+  "Visual showcase":"视觉展示","EXHIBITION NEWS":"展会新闻","Updates and insights":"最新动态与洞察","ORGANIZERS & PARTNERS":"主办方与合作伙伴","Industry network":"行业网络",
+  "CONFERENCES & NETWORKING":"会议与商务交流","Business programme":"商务活动","THE VENUE":"展会场馆","Jakarta International Expo (JIEXPO), Kemayoran":"雅加达国际展览中心（JIEXPO），克玛约兰",
+  "VISITOR INFORMATION":"观众信息","Registration and entry":"登记与入场"};
+  document.querySelectorAll(".detail-intro").forEach(box=>{const w=document.createTreeWalker(box,NodeFilter.SHOW_TEXT);let n;while((n=w.nextNode())){const k=n.nodeValue.trim();if(T[k])n.nodeValue=n.nodeValue.replace(k,T[k])}});
+  const t=document.querySelector(".detail-intro h1");if(t&&document.title.includes(" — "))document.title=t.textContent.trim()+" — "+document.title.split(" — ").slice(1).join(" — ")}
+
  // FR-001: breadcrumb on inner pages (Home › Page).
  const main=document.querySelector("main");
  if(main&&location.pathname.replace(/\/$/,"")&&!document.querySelector("nav.breadcrumb")){const h=document.querySelector("main h1");if(h){const nav=document.createElement("nav");nav.className="breadcrumb container";nav.setAttribute("aria-label","Breadcrumb");
@@ -46,12 +55,18 @@
  // FR-005/009/035: published CMS items replace static fallbacks; drafts never reach the browser.
  // FR-017: partnership CTA preselects the enquiry topic on the contact page.
  const topic=new URLSearchParams(location.search).get("topic");
+ // Downloads: a file card with a PDF / document icon so it is obvious the file can be downloaded.
+ const fileExt=i=>{const t=String(i.fileType||"").toUpperCase().replace(/^.*\//,"");const fromUrl=(String(i.url||"").split("?")[0].match(/\.([a-z0-9]{2,5})$/i)||[])[1];return (t==="APPLICATION/PDF"?"PDF":t)||(fromUrl||"FILE").toUpperCase()};
+ const fileIcon=ext=>`<svg class="dl-icon" viewBox="0 0 40 48" aria-hidden="true" focusable="false"><path d="M6 1h20l13 13v29a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V5a4 4 0 0 1 4-4z" fill="#fff" stroke="currentColor" stroke-width="2"/><path d="M26 1v9a4 4 0 0 0 4 4h9" fill="none" stroke="currentColor" stroke-width="2"/><rect x="0" y="25" width="30" height="14" rx="3" fill="currentColor"/><text x="15" y="35.5" text-anchor="middle" font-size="9" font-weight="700" fill="#fff" font-family="Arial,sans-serif">${esc(ext.slice(0,4))}</text></svg>`;
+ const downloadItem=i=>{const ext=fileExt(i),size=i.fileSizeBytes?(i.fileSizeBytes>=1048576?(i.fileSizeBytes/1048576).toFixed(1)+" MB":Math.max(1,Math.round(i.fileSizeBytes/1024))+" KB"):"";
+  const meta=[ext,size,L("Updated","更新于")+" "+new Date(i.updatedAt).toLocaleDateString(lang==="zh"?"zh-CN":"en-GB",{timeZone:"Asia/Jakarta"})].filter(Boolean).join(" · ");
+  return `<li class="cms-download${ext==="PDF"?" is-pdf":""}"><a href="${esc(i.url)}" download aria-label="${esc(L("Download","下载")+" "+i.title+" ("+[ext,size].filter(Boolean).join(", ")+")")}">${fileIcon(ext)}<span class="dl-text"><strong>${esc(i.title)}</strong><small>${esc(meta)}</small></span><span class="dl-action" aria-hidden="true">${L("Download","下载")} <b>↓</b></span></a></li>`};
  const renderList=async box=>{
   if(onPreview)return;
   try{const r=await fetch(`${api}/content?kind=${encodeURIComponent(box.dataset.cmsKind)}&locale=${lang}`);if(!r.ok)return;const {items}=await r.json();if(!items?.length)return;
    const kind=box.dataset.cmsKind;
    box.innerHTML=items.map(i=>kind==="DOWNLOAD"
-    ?`<li class="cms-download"><a href="${esc(i.url)}" download>${esc(i.title)}</a> <span>${esc(i.fileType||"")}${i.fileSizeBytes?" · "+Math.max(1,Math.round(i.fileSizeBytes/1024))+" KB":""} · ${lang==="zh"?"更新于":"Updated"} ${new Date(i.updatedAt).toLocaleDateString(lang==="zh"?"zh-CN":"en-GB",{timeZone:"Asia/Jakarta"})}</span></li>`
+    ?downloadItem(i)
     :kind==="GALLERY"?`<li class="cms-gallery"><a href="${esc(i.imageUrl)}" target="_blank" rel="noopener"><img src="${esc(i.imageUrl)}" alt="${esc(i.altText||i.title)}" loading="lazy"></a><span>${esc(i.title)}${i.role?" · "+esc(i.role):""}</span></li>`
     :`<li class="cms-partner">${i.imageUrl?`<img src="${esc(i.imageUrl)}" alt="${esc(i.altText||i.title)}" loading="lazy">`:""}<strong>${esc(i.title)}</strong>${i.role?`<span>${esc(i.role)}</span>`:""}${i.summary?`<p>${esc(i.summary)}</p>`:""}</li>`).join("");
    box.hidden=false;box.closest("[data-cms-section]")?.removeAttribute("hidden");
