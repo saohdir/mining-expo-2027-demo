@@ -51,6 +51,11 @@
       status.textContent = L(`Page ${page} of ${pages}`, `第 ${page} 页，共 ${pages} 页`);
       if (focus) { const top = section.getBoundingClientRect().top; if (top < 0) section.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start"}); pager.querySelector(`[data-page="${page}"][aria-current]`)?.focus({preventScroll: true}); }
     };
+    // Swipe on touch screens: left = next page, right = previous page.
+    let sx = null, sy = 0;
+    grid.addEventListener("touchstart", e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, {passive: true});
+    grid.addEventListener("touchend", e => { if (sx === null || pages < 2) return; const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy; sx = null;
+      if (Math.abs(dx) > 60 && Math.abs(dx) > 1.5 * Math.abs(dy)) { const p = Math.min(pages, Math.max(1, page + (dx < 0 ? 1 : -1))); if (p !== page) { page = p; render(true); } } }, {passive: true});
     pager.addEventListener("click", e => { const b = e.target.closest("button[data-page]"); if (!b || b.disabled) return; const p = Number(b.dataset.page); if (p >= 1 && p <= pages && p !== page) { page = p; render(true); } });
     render(false);
   });

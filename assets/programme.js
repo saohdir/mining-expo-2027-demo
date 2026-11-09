@@ -30,7 +30,8 @@
     pager.className = "programme-pager"; pager.setAttribute("aria-label", L("Pagination", "分页"));
     grid.after(pager);
     const clamp = v => { const n = Math.trunc(Number(v)); return Number.isFinite(n) ? Math.min(pages, Math.max(1, n)) : 1; };
-    const urlPage = () => new URLSearchParams(location.search).get("page");
+    const PARAM = grid.dataset.pageParam || "page";
+    const urlPage = () => new URLSearchParams(location.search).get(PARAM);
     const card = (i, n) => {
       const img = safeImg(i.imageUrl);
       return `<article class="conference-card is-linked${i.isLegacy ? " is-reference" : ""}"${i.fallback ? ' lang="en"' : ""}>
@@ -68,12 +69,17 @@
     };
     const go = (p, push) => {
       const u = new URL(location.href);
-      if (p === 1) u.searchParams.delete("page"); else u.searchParams.set("page", String(p));
+      if (p === 1) u.searchParams.delete(PARAM); else u.searchParams.set(PARAM, String(p));
       history[push ? "pushState" : "replaceState"]({programmePage: p}, "", u);
       render(p, push);
     };
     pager.addEventListener("click", e => { const t = e.target.closest("button[data-page]"); if (!t || t.disabled) return; const p = clamp(t.dataset.page); if (p !== page) go(p, true); });
-    addEventListener("popstate", () => render(clamp(urlPage() || 1), true));
+    addEventListener("popstate", () => { const p = clamp(urlPage() || 1); if (p !== page) render(p, true); });
+    // Swipe on touch screens: left = next page, right = previous page.
+    let sx = null, sy = 0;
+    grid.addEventListener("touchstart", e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, {passive: true});
+    grid.addEventListener("touchend", e => { if (sx === null || pages < 2) return; const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy; sx = null;
+      if (Math.abs(dx) > 60 && Math.abs(dx) > 1.5 * Math.abs(dy)) { const p = clamp(page + (dx < 0 ? 1 : -1)); if (p !== page) go(p, true); } }, {passive: true});
     const asked = urlPage();
     const start = clamp(asked || 1);
     if (asked !== null && String(start) !== asked) go(start, false); else render(start, false); // invalid ?page= → nearest valid page
