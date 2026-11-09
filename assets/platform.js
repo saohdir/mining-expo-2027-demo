@@ -154,6 +154,8 @@
   }catch{}
   if(!layout||!Array.isArray(layout.blocks))return;
   applyFields(layout.fields);
+  // Retain translated scope copy when the CMS falls back to English fields on a Chinese URL.
+  if(lang==="zh"&&key==="exhibitors")window.IMDX_exhibitorsApplyZhFallback?.();
   if(layout.seo?.title)document.title=layout.seo.title;
   if(layout.seo?.description){let m=document.querySelector('meta[name="description"]');if(!m){m=document.createElement("meta");m.name="description";document.head.append(m)}m.content=layout.seo.description}
   const safe=u=>typeof u==="string"&&(/^\/[A-Za-z0-9/_\-.#?=&%]*$/.test(u)||/^https:\/\//.test(u)||/^mailto:/.test(u))?u:"";
