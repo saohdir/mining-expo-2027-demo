@@ -113,6 +113,25 @@
   const render=()=>{ul.innerHTML=items.filter(i=>!sel.value||day(i.startsAt)===sel.value).sort((a,b)=>a.startsAt.localeCompare(b.startsAt)).map(i=>`<li><time>${new Date(i.startsAt).toLocaleTimeString("en-GB",{timeZone:"Asia/Jakarta",hour:"2-digit",minute:"2-digit"})} WIB</time> <strong>${esc(i.title)}</strong></li>`).join("")};
   sel.addEventListener("change",render);render();sched.hidden=false}catch{}})()}
 
+ // CMS editable fields: text/links/images inside designed sections and the shared header/footer carry data-cms-f keys
+ // (stamped in the HTML). Overrides are applied as TEXT nodes only; "rich" fields understand new line, *em*, **strong**.
+ const cmsSafe=u=>typeof u==="string"&&(/^\/[A-Za-z0-9/_\-.#?=&%]*$/.test(u)||/^https:\/\//.test(u)||/^mailto:/.test(u))?u:"";
+ const cmsRich=v=>{const f=document.createDocumentFragment();String(v).split("\n").forEach((line,i)=>{if(i)f.append(document.createElement("br"));
+  line.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/).forEach(part=>{if(!part)return;const m=part.match(/^(\*\*?)([^*]+)\1$/);if(m){const e=document.createElement(m[1].length===2?"strong":"em");e.textContent=m[2];f.append(e)}else f.append(part)})});return f};
+ const applyFields=(fields,manifest)=>{if(!fields||typeof fields!=="object")return;
+  document.querySelectorAll("[data-cms-f]").forEach(node=>{const v=fields[node.dataset.cmsF];if(!v)return;
+   if(node.tagName==="IMG"){if(cmsSafe(v.src)){node.src=cmsSafe(v.src);node.removeAttribute("srcset")}if(typeof v.alt==="string")node.alt=v.alt;return}
+   if(typeof v.text==="string"){const mode=v.mode||"plain";
+    if(mode==="rich")node.replaceChildren(cmsRich(v.text));
+    else if(mode==="own"){const ts=[...node.childNodes].filter(n=>n.nodeType===3&&/[\p{L}\p{N}]/u.test(n.nodeValue));if(ts.length){const lead=ts[0].nodeValue.match(/^\s*/)[0],trail=ts[0].nodeValue.match(/\s*$/)[0];ts[0].nodeValue=lead+v.text+trail;ts.slice(1).forEach(n=>n.nodeValue=" ")}}
+    else node.textContent=v.text}
+   if(node.tagName==="A"&&cmsSafe(v.href))node.setAttribute("href",cmsSafe(v.href))})};
+ window.IMDX_applyCmsFields=applyFields;
+ // Site-wide header/footer fields (page key "site"), independent of the page layout.
+ (async()=>{if(onPreview)return;const preview=new URLSearchParams(location.search).get("cmsPreview")==="1";try{
+  const r=preview?await fetch(`${api.replace(/\/public$/,"/admin")}/pages/site?locale=${lang}`,{credentials:"same-origin",cache:"no-store"}):await fetch(`${api}/pages/site?locale=${lang}`);
+  if(r.ok){const j=await r.json();applyFields((preview?j.draft:j.layout)?.fields)}}catch{}})();
+
  // CMS pages & layout: published layout (or staff draft preview) reorders/hides designed sections and adds blocks.
  // Content is inserted as TEXT only (no HTML from the CMS), links limited to site paths/https/mailto.
  (async()=>{
@@ -125,6 +144,7 @@
    else{const r=await fetch(`${api}/pages/${key}?locale=${lang}`);if(r.ok)layout=(await r.json()).layout}
   }catch{}
   if(!layout||!Array.isArray(layout.blocks))return;
+  applyFields(layout.fields);
   if(layout.seo?.title)document.title=layout.seo.title;
   if(layout.seo?.description){let m=document.querySelector('meta[name="description"]');if(!m){m=document.createElement("meta");m.name="description";document.head.append(m)}m.content=layout.seo.description}
   const safe=u=>typeof u==="string"&&(/^\/[A-Za-z0-9/_\-.#?=&%]*$/.test(u)||/^https:\/\//.test(u)||/^mailto:/.test(u))?u:"";
