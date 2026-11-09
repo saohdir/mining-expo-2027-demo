@@ -1,0 +1,25 @@
+/* Exhibitors page — align eight scope cards with the Home layout. */
+.interior-exhibitors .industry-photo-grid{margin-top:12px}
+.interior-exhibitors .industry-card-copy{display:flex;flex-direction:column;gap:13px}
+.interior-exhibitors .industry-card-copy strong{font-size:clamp(18px,1.45vw,23px);line-height:1.18;font-weight:700;letter-spacing:-.035em}
+.interior-exhibitors .industry-card-copy small{display:block;font-size:14px;line-height:1.5;font-weight:300;color:#88584b}
+.interior-exhibitors .industry-card-detail[hidden]{display:none!important}
+
+/* Three editorial reasons to exhibit; keep numbered arguments readable on mobile. */
+.interior-exhibitors .exhibit-copy>p{margin-bottom:17px}
+.interior-exhibitors .exhibit-benefits{list-style:none;margin:0 0 28px;padding:0;display:grid;gap:15px;max-width:610px}
+.interior-exhibitors .exhibit-benefits li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:start;padding-bottom:14px;border-bottom:1px solid rgba(82,15,0,.12)}
+.interior-exhibitors .exhibit-benefits li:last-child{padding-bottom:0;border-bottom:0}
+.interior-exhibitors .exhibit-benefit-number{display:inline-block;color:var(--brand);font-size:13px;font-weight:700;letter-spacing:.07em;padding-top:4px}
+.interior-exhibitors .exhibit-benefits p{margin:0;font-size:14px;line-height:1.65;color:var(--ink)}
+
+/* Download affordance for CMS PDFs and other published files. */
+.cms-download{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.cms-download>a{display:inline-flex;align-items:center;gap:12px;min-width:0;font-weight:600;text-underline-offset:3px}
+.cms-download-icon{position:relative;display:inline-flex;align-items:center;justify-content:center;flex:none;width:34px;height:40px;border-radius:4px;background:#fff0e9;color:#aa3209;border:1px solid #d7a28d}
+.cms-download-icon svg{width:24px;height:27px}
+.cms-download-icon-pdf{background:#fff0ec;color:#ad271a;border-color:#dd9a92}
+.cms-download-icon b{position:absolute;bottom:2px;font-size:9px;letter-spacing:.03em;font-weight:700;background:#fff0ec;line-height:1}
+.cms-download a:hover .cms-download-icon{background:#fbded5}
+.cms-download a:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+@media(max-width:700px){.interior-exhibitors .exhibit-benefits{gap:12px}.interior-exhibitors .exhibit-benefits p{font-size:14px}.cms-download{align-items:flex-start}}
