@@ -40,3 +40,14 @@
 .cms-preview-bar{position:sticky;top:0;z-index:1000;background:#35120a;color:#fff;padding:8px 16px;font-size:.85rem;text-align:center}
 .cms-block h2{margin-top:0}.cms-block img{max-width:100%;height:auto;border-radius:10px}.cms-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px}.cms-stats dd{font-size:2rem;font-weight:700;margin:0}.cms-stats dt{opacity:.75}
 .lang-switch{display:inline-flex;gap:4px;margin-left:12px}.lang-switch button{font:inherit;font-size:.8rem;padding:4px 8px;border:1px solid currentColor;border-radius:6px;background:transparent;color:inherit;cursor:pointer}.lang-switch button[aria-pressed=true]{background:#c2410c;border-color:#c2410c;color:#fff}
+/* Sign-in / registration popup */
+body.auth-popup-open{overflow:hidden}
+.auth-popup{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:20px 14px;background:rgba(16,24,40,.62);backdrop-filter:blur(4px);animation:auth-fade .2s ease-out}
+.auth-popup-panel{position:relative;width:min(520px,100%);background:#fff;border-radius:20px;box-shadow:0 30px 80px rgba(16,24,40,.35);overflow:hidden}
+.auth-popup-panel iframe{display:block;width:100%;height:560px;max-height:calc(100vh - 80px);border:0;opacity:0;transition:opacity .2s}
+.auth-popup.is-ready iframe{opacity:1}.auth-popup.is-ready .auth-popup-loading{display:none}
+.auth-popup-loading{position:absolute;inset:0;display:grid;place-items:center;color:#5c6b78;font-size:15px}
+.auth-popup-close{position:absolute;top:10px;right:12px;z-index:2;width:38px;height:38px;border:0;border-radius:50%;background:#fff;color:#344054;font-size:26px;line-height:1;cursor:pointer}
+.auth-popup-close:hover{background:#F2F4F7}.auth-popup-close:focus-visible{outline:3px solid #c2410c;outline-offset:2px}
+@keyframes auth-fade{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.auth-popup{animation:none}.auth-popup-panel iframe{transition:none}}
