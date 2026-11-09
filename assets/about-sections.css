@@ -6,7 +6,7 @@
 .about-market-grid{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(290px,.82fr);gap:clamp(22px,4vw,56px);align-items:stretch}
 .about-market-left{min-width:0}
 .about-market-left h2,.about-highlights-head h2{font:500 clamp(34px,3.9vw,58px)/1.075 "Space Grotesk",sans-serif;letter-spacing:-.055em;color:#520F00;margin:0 0 33px}
-.about-market-left h2 em,.about-highlights-head h2 em{font-style:normal;font-weight:300;color:#FF5912}
+.about-market-left h2 em,.about-highlights-head h2 em{font-style:normal;font-weight:300;color:#c2410c}
 .about-stat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
 .about-stat{min-width:0;display:flex;flex-direction:column;gap:6px;background:#FFFDFB;border:1px solid #ECD5C2;border-radius:10px;padding:21px 18px 24px;box-shadow:0 10px 26px rgba(74,27,6,.035)}
 .about-stat-num{color:var(--about-orange-text);letter-spacing:.1em;font-weight:700;font-size:11px}
@@ -70,13 +70,13 @@
 .interior-about .about-exhibition-heading{min-width:0}
 .interior-about .about-exhibition-pretitle,.interior-about .about-exhibition-copy-kicker,.interior-about .about-exhibition-card-heading>div>span{display:block;color:#A6330C;font-size:11px;font-weight:700;letter-spacing:.125em;margin-bottom:17px}
 .interior-about .about-exhibition-grid h2{font:500 clamp(39px,4.1vw,60px)/1.065 "Space Grotesk",sans-serif;letter-spacing:-.06em;color:#520F00;margin:0 0 25px}
-.interior-about .about-exhibition-grid h2 .accent-italic{font-weight:300;color:#FF5912}
+.interior-about .about-exhibition-grid h2 .accent-italic{font-weight:300;color:#c2410c}
 .interior-about .about-exhibition-standfirst{max-width:435px;margin:0;font-size:clamp(18px,1.75vw,22px);line-height:1.48;color:#88584B;font-weight:400}
-.interior-about .intro-right.about-exhibition-copy{max-width:640px;padding:4px 0 0 25px;border-left:2px solid #FF5912}
+.interior-about .intro-right.about-exhibition-copy{max-width:640px;padding:4px 0 0 25px;border-left:2px solid #c2410c}
 .interior-about .about-exhibition-copy-kicker{margin-bottom:13px}
 .interior-about .about-exhibition-copy h3{font:700 clamp(22px,2.25vw,30px)/1.2 "Space Grotesk",sans-serif;letter-spacing:-.045em;margin:0 0 20px;color:#520F00}
 .interior-about .intro-right.about-exhibition-copy p{font:400 15px/1.72 "Space Grotesk",sans-serif;margin:0 0 15px;color:#725042}
-.interior-about .about-exhibition-link{display:inline-flex!important;align-items:center;gap:19px;margin-top:9px!important;color:#A6330C;font-size:14px!important;font-weight:700;border-bottom:1px solid #FF5912;padding-bottom:6px}
+.interior-about .about-exhibition-link{display:inline-flex!important;align-items:center;gap:19px;margin-top:9px!important;color:#A6330C;font-size:14px!important;font-weight:700;border-bottom:1px solid #c2410c;padding-bottom:6px}
 .interior-about .about-exhibition-facts{display:grid;grid-template-columns:1fr 1fr 1.34fr;gap:0;margin:39px 0 0;background:#FFF6EC;border:1px solid #ECD5C2;border-radius:10px;overflow:hidden}
 .interior-about .about-exhibition-fact{padding:22px 24px;display:flex;flex-direction:column;gap:8px;min-width:0}
 .interior-about .about-exhibition-fact + .about-exhibition-fact{border-left:1px solid #ECD5C2}
@@ -87,7 +87,7 @@
 .interior-about .about-exhibition-card-heading>div{max-width:600px}
 .interior-about .about-exhibition-card-heading>div>span{margin-bottom:9px}
 .interior-about .about-exhibition-card-heading h3{font:500 clamp(27px,3vw,39px)/1.1 "Space Grotesk",sans-serif;letter-spacing:-.055em;color:#520F00;margin:0}
-.interior-about .about-exhibition-card-heading h3 em{font-style:normal;color:#FF5912;font-weight:300}
+.interior-about .about-exhibition-card-heading h3 em{font-style:normal;color:#c2410c;font-weight:300}
 .interior-about .about-exhibition-card-heading>p{font-size:14px;line-height:1.6;color:#88584B;font-weight:400;max-width:350px;margin:0}
 .interior-about .intro-feature-grid{margin-top:0}
 .interior-about .intro-feature-card{background:#FFFDFB}

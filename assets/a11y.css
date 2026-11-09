@@ -1,0 +1,11 @@
+/* NFR-02 (WCAG 2.2 AA) contrast fixes. Loaded last on every page. */
+/* Detail pages render the media section on white: use dark text there. */
+.detail-main .icee-media{color:var(--ink)}
+.detail-main .icee-media .icee-section-heading h2{color:var(--ink)}
+.detail-main .icee-media .icee-section-heading p,.detail-main .icee-media-note,.detail-main .icee-media-note span{color:#4a5560}
+.detail-main .icee-media-note span:first-child{color:#c2410c}
+/* On the dark media section the accessible orange is the light tint (≥4.5:1 on navy); detail pages restore the dark tint above. */
+.icee-media .icee-kicker{color:#ff8a4c}
+.detail-main .icee-media .icee-kicker{color:#c2410c}
+/* Large decorative step numbers (aria-hidden; the "STEP 0n" label carries the meaning): ≥3:1 for large text. */
+.journey-step>b{color:#b08b70}
