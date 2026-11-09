@@ -45,17 +45,13 @@
   display:flex;flex-direction:column;align-items:stretch;gap:16px;
   border:1px solid #ecd5c2;border-radius:20px;
   background:#fffdfb;padding:clamp(23px,3vw,33px);
-  box-shadow:0 6px 22px rgba(82,15,0,.035);transition:transform .2s,border-color .2s,box-shadow .2s
-}
-.interior-exhibitors .imdx-benefit-card:hover{
-  transform:translateY(-4px);border-color:#c2410c;box-shadow:0 16px 38px rgba(82,15,0,.09)
+  box-shadow:0 6px 22px rgba(82,15,0,.035)
 }
 .interior-exhibitors .imdx-benefit-featured{
   grid-column:span 2;background:#520f00;color:#fff;border-color:#520f00;
   background-image:radial-gradient(circle at 93% 0%,rgba(242,128,65,.26),transparent 50%),
     linear-gradient(130deg,#520f00,#371007 75%)
 }
-.interior-exhibitors .imdx-benefit-featured:hover{border-color:#c2410c}
 .interior-exhibitors .imdx-benefit-card-top{
   display:flex;align-items:start;justify-content:space-between;gap:16px;margin-bottom:auto
 }
@@ -97,7 +93,5 @@
   .interior-exhibitors .imdx-benefit-featured h3{font-size:30px}
 }
 @media(prefers-reduced-motion:reduce){
-  .interior-exhibitors .imdx-benefit-card,
   .interior-exhibitors .imdx-exhibitor-page-nav a{transition:none}
-  .interior-exhibitors .imdx-benefit-card:hover{transform:none}
 }
