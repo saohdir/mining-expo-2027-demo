@@ -158,6 +158,8 @@
   }catch{}
   if(!layout||!Array.isArray(layout.blocks))return;
   applyFields(layout.fields);
+  // Refresh Chinese defaults only when they were not replaced by approved localized CMS text.
+  if(key==="exhibitors")window.IMDX_translateExhibitorBenefits?.();
   if(layout.seo?.title)document.title=layout.seo.title;
   if(layout.seo?.description){let m=document.querySelector('meta[name="description"]');if(!m){m=document.createElement("meta");m.name="description";document.head.append(m)}m.content=layout.seo.description}
   const safe=u=>typeof u==="string"&&(/^\/[A-Za-z0-9/_\-.#?=&%]*$/.test(u)||/^https:\/\//.test(u)||/^mailto:/.test(u))?u:"";
