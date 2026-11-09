@@ -125,15 +125,6 @@
   const show=()=>{ul.innerHTML+=items.slice(page*per,(page+1)*per).map(i=>`<li class="cms-news"><time datetime="${esc(i.publishedAt)}">${new Date(i.publishedAt).toLocaleDateString(lang==="zh"?"zh-CN":"en-GB",{timeZone:"Asia/Jakarta",dateStyle:"long"})}</time><h3>${i.url?`<a href="${esc(i.url)}">${esc(i.title)}</a>`:esc(i.title)}</h3>${i.summary?`<p>${esc(i.summary)}</p>`:""}</li>`).join("");page++;more.hidden=page*per>=items.length};
   more.addEventListener("click",show);show();news.hidden=false}catch{}})()}
 
- // FR-018: confirmed programme schedule only (no invented times), filter by date.
- const sched=document.querySelector("[data-schedule]");
- if(sched&&!onPreview){(async()=>{try{const r=await fetch(`${api}/events`);if(!r.ok)return;const {events}=await r.json();
-  const items=events.flatMap(e=>e.conferences.filter(c=>c.startsAt).map(c=>({title:c.title,startsAt:c.startsAt,state:c.registrationState})));
-  if(!items.length)return;const sel=sched.querySelector("select"),ul=sched.querySelector("ul");
-  const day=d=>new Date(d).toLocaleDateString("en-CA",{timeZone:"Asia/Jakarta"});
-  [...new Set(items.map(i=>day(i.startsAt)))].sort().forEach(d=>sel.add(new Option(new Date(d+"T00:00:00+07:00").toLocaleDateString(lang==="zh"?"zh-CN":"en-GB",{dateStyle:"full",timeZone:"Asia/Jakarta"}),d)));
-  const render=()=>{ul.innerHTML=items.filter(i=>!sel.value||day(i.startsAt)===sel.value).sort((a,b)=>a.startsAt.localeCompare(b.startsAt)).map(i=>`<li><time>${new Date(i.startsAt).toLocaleTimeString("en-GB",{timeZone:"Asia/Jakarta",hour:"2-digit",minute:"2-digit"})} WIB</time> <strong>${esc(i.title)}</strong></li>`).join("")};
-  sel.addEventListener("change",render);render();sched.hidden=false}catch{}})()}
 
  // CMS editable fields: text/links/images inside designed sections and the shared header/footer carry data-cms-f keys
  // (stamped in the HTML). Overrides are applied as TEXT nodes only; "rich" fields understand new line, *em*, **strong**.
