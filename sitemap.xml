@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://uat.imdx.tech/</loc></url>
-  <url><loc>https://uat.imdx.tech/about/</loc></url>
-  <url><loc>https://uat.imdx.tech/contact/</loc></url>
-  <url><loc>https://uat.imdx.tech/exhibition/</loc></url>
-  <url><loc>https://uat.imdx.tech/exhibitors/</loc></url>
-  <url><loc>https://uat.imdx.tech/highlights/</loc></url>
-  <url><loc>https://uat.imdx.tech/news/</loc></url>
-  <url><loc>https://uat.imdx.tech/partners/</loc></url>
-  <url><loc>https://uat.imdx.tech/programme/</loc></url>
-  <url><loc>https://uat.imdx.tech/the-venue/</loc></url>
-  <url><loc>https://uat.imdx.tech/visitors/</loc></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://uat.imdx.tech/about/</loc><xhtml:link rel="alternate" hreflang="en" href="https://uat.imdx.tech/about/"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://uat.imdx.tech/zh/about/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://uat.imdx.tech/about/"/></url>
+  <url><loc>https://uat.imdx.tech/zh/about/</loc><xhtml:link rel="alternate" hreflang="en" href="https://uat.imdx.tech/about/"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://uat.imdx.tech/zh/about/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://uat.imdx.tech/about/"/></url>
+  <url><loc>https://uat.imdx.tech/contact/</loc><xhtml:link rel="alternate" hreflang="en" href="https://uat.imdx.tech/contact/"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://uat.imdx.tech/zh/contact/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://uat.imdx.tech/contact/"/></url>
+  <url><loc>https://uat.imdx.tech/zh/contact/</loc><xhtml:link rel="alternate" hreflang="en" href="https://uat.imdx.tech/contact/"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://uat.imdx.tech/zh/contact/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://uat.imdx.tech/contact/"/></url>
+  <url><loc>https://uat.imdx.tech/exhibition/</loc><xhtml:link rel="alternate" hreflang="en" href="https://uat.imdx.tech/exhibition/"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://uat.imdx.tech/zh/exhibition/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://uat.imdx.tech/exhibition/"/></url>
+  <url><loc>https://uat.imdx.tech/zh/exhibition/</loc><xhtml:link rel="alternate" hreflang="en" href="https://uat.imdx.tech/exhibition/"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://uat.imdx.tech/zh/exhibition/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://uat.imdx.tech/exhibition/"/></url>
+  <url><loc>https://uat.imdx.tech/exhibitors/</loc><xhtml:link rel="alternate" hreflang="en" href="https://uat.imdx.tech/exhibitors/"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://uat.imdx.tech/zh/exhibitors/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://uat.imdx.tech/exhibitors/"/></url>
+  <url><loc>https://uat.imdx.tech/zh/exhibitors/</loc><xhtml:link rel="alternate" hreflang="en" href="https://uat.imdx.tech/exhibitors/"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://uat.imdx.tech/zh/exhibitors/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://uat.imdx.tech/exhibitors/"/></url>
+  <url><loc>https://uat.imdx.tech/highlights/</loc><xhtml:link rel="alternate" hreflang="en" href="https://uat.imdx.tech/highlights/"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://uat.imdx.tech/zh/highlights/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://uat.imdx.tech/highlights/"/></url>
+  <url><loc>https://uat.imdx.tech/zh/highlights/</loc><xhtml:link rel="alternate" hreflang="en" href="https://uat.imdx.tech/highlights/"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://uat.imdx.tech/zh/highlights/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://uat.imdx.tech/highlights/"/></url>
+  <url><loc>https://uat.imdx.tech/</loc><xhtml:link rel="alternate" hreflang="en" href="https://uat.imdx.tech/"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://uat.imdx.tech/zh/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://uat.imdx.tech/"/></url>
+  <url><loc>https://uat.imdx.tech/zh/</loc><xhtml:link rel="alternate" hreflang="en" href="https://uat.imdx.tech/"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://uat.imdx.tech/zh/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://uat.imdx.tech/"/></url>
+  <url><loc>https://uat.imdx.tech/news/</loc><xhtml:link rel="alternate" hreflang="en" href="https://uat.imdx.tech/news/"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://uat.imdx.tech/zh/news/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://uat.imdx.tech/news/"/></url>
+  <url><loc>https://uat.imdx.tech/zh/news/</loc><xhtml:link rel="alternate" hreflang="en" href="https://uat.imdx.tech/news/"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://uat.imdx.tech/zh/news/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://uat.imdx.tech/news/"/></url>
+  <url><loc>https://uat.imdx.tech/partners/</loc><xhtml:link rel="alternate" hreflang="en" href="https://uat.imdx.tech/partners/"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://uat.imdx.tech/zh/partners/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://uat.imdx.tech/partners/"/></url>
+  <url><loc>https://uat.imdx.tech/zh/partners/</loc><xhtml:link rel="alternate" hreflang="en" href="https://uat.imdx.tech/partners/"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://uat.imdx.tech/zh/partners/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://uat.imdx.tech/partners/"/></url>
+  <url><loc>https://uat.imdx.tech/programme/</loc><xhtml:link rel="alternate" hreflang="en" href="https://uat.imdx.tech/programme/"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://uat.imdx.tech/zh/programme/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://uat.imdx.tech/programme/"/></url>
+  <url><loc>https://uat.imdx.tech/zh/programme/</loc><xhtml:link rel="alternate" hreflang="en" href="https://uat.imdx.tech/programme/"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://uat.imdx.tech/zh/programme/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://uat.imdx.tech/programme/"/></url>
+  <url><loc>https://uat.imdx.tech/the-venue/</loc><xhtml:link rel="alternate" hreflang="en" href="https://uat.imdx.tech/the-venue/"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://uat.imdx.tech/zh/the-venue/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://uat.imdx.tech/the-venue/"/></url>
+  <url><loc>https://uat.imdx.tech/zh/the-venue/</loc><xhtml:link rel="alternate" hreflang="en" href="https://uat.imdx.tech/the-venue/"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://uat.imdx.tech/zh/the-venue/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://uat.imdx.tech/the-venue/"/></url>
+  <url><loc>https://uat.imdx.tech/visitors/</loc><xhtml:link rel="alternate" hreflang="en" href="https://uat.imdx.tech/visitors/"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://uat.imdx.tech/zh/visitors/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://uat.imdx.tech/visitors/"/></url>
+  <url><loc>https://uat.imdx.tech/zh/visitors/</loc><xhtml:link rel="alternate" hreflang="en" href="https://uat.imdx.tech/visitors/"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://uat.imdx.tech/zh/visitors/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://uat.imdx.tech/visitors/"/></url>
   <url><loc>https://uat.imdx.tech/floorplan</loc></url>
   <url><loc>https://uat.imdx.tech/conferences</loc></url>
 </urlset>
