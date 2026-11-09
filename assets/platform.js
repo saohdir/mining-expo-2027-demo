@@ -46,12 +46,19 @@
  // FR-005/009/035: published CMS items replace static fallbacks; drafts never reach the browser.
  // FR-017: partnership CTA preselects the enquiry topic on the contact page.
  const topic=new URLSearchParams(location.search).get("topic");
+ const safeDownload=u=>typeof u==="string"&&(/^https:\/\/[^\s<>"']+$/i.test(u)||/^\/(?!\/)[A-Za-z0-9/_\-.#?=&%]+$/.test(u))?u:"";
+ const downloadIcon=pdf=>'<span class="cms-download-icon'+(pdf?' cms-download-icon-pdf':'')+'" aria-hidden="true"><svg viewBox="0 0 24 28" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 1.5h10l6 6V26H4z"/><path d="M14 1.5v6h6"/></svg>'+(pdf?'<b>PDF</b>':'')+'</span>';
+ const downloadItem=i=>{const url=safeDownload(i.url);if(!url)return "";const pdf=/pdf/i.test(i.fileType||"")||/\.pdf(?:[?#]|$)/i.test(url);
+  const details=[i.fileType||(pdf?"PDF":L("File","文件")),i.fileSizeBytes?Math.max(1,Math.round(i.fileSizeBytes/1024))+" KB":null,
+   L("Updated","更新于")+" "+new Date(i.updatedAt).toLocaleDateString(lang==="zh"?"zh-CN":"en-GB",{timeZone:"Asia/Jakarta"})].filter(Boolean).join(" · ");
+  return '<li class="cms-download"><a href="'+esc(url)+'" download aria-label="'+esc(L("Download ","下载 ")+i.title+(pdf?" (PDF)":""))+'">'+downloadIcon(pdf)+'<span>'+esc(i.title)+'</span></a><span>'+esc(details)+'</span></li>';
+ };
  const renderList=async box=>{
   if(onPreview)return;
   try{const r=await fetch(`${api}/content?kind=${encodeURIComponent(box.dataset.cmsKind)}&locale=${lang}`);if(!r.ok)return;const {items}=await r.json();if(!items?.length)return;
    const kind=box.dataset.cmsKind;
    box.innerHTML=items.map(i=>kind==="DOWNLOAD"
-    ?`<li class="cms-download"><a href="${esc(i.url)}" download>${esc(i.title)}</a> <span>${esc(i.fileType||"")}${i.fileSizeBytes?" · "+Math.max(1,Math.round(i.fileSizeBytes/1024))+" KB":""} · ${lang==="zh"?"更新于":"Updated"} ${new Date(i.updatedAt).toLocaleDateString(lang==="zh"?"zh-CN":"en-GB",{timeZone:"Asia/Jakarta"})}</span></li>`
+    ?downloadItem(i)
     :kind==="GALLERY"?`<li class="cms-gallery"><a href="${esc(i.imageUrl)}" target="_blank" rel="noopener"><img src="${esc(i.imageUrl)}" alt="${esc(i.altText||i.title)}" loading="lazy"></a><span>${esc(i.title)}${i.role?" · "+esc(i.role):""}</span></li>`
     :`<li class="cms-partner">${i.imageUrl?`<img src="${esc(i.imageUrl)}" alt="${esc(i.altText||i.title)}" loading="lazy">`:""}<strong>${esc(i.title)}</strong>${i.role?`<span>${esc(i.role)}</span>`:""}${i.summary?`<p>${esc(i.summary)}</p>`:""}</li>`).join("");
    box.hidden=false;box.closest("[data-cms-section]")?.removeAttribute("hidden");
@@ -94,15 +101,6 @@
   });
  }
 
- // FR-014/FR-110: exhibitor directory (approved names only, booth numbers from assignments).
- const dir=document.querySelector("[data-exhibitor-directory]");
- if(dir&&!onPreview){const list=dir.querySelector("ul"),search=dir.querySelector("input"),cat=dir.querySelector("select"),empty=dir.querySelector("[data-empty]");
-  const load=async()=>{try{const q=new URLSearchParams({q:search.value,category:cat.value});const r=await fetch(`${api}/exhibitors?${q}`);if(!r.ok)return;const j=await r.json();
-   if(cat.options.length<=1)j.categories.forEach(c=>cat.add(new Option(c,c)));
-   list.innerHTML=j.exhibitors.map(e=>`<li class="cms-partner"><strong>${esc(e.name)}</strong><span>${L("Booth","展位")} ${esc(e.boothNo)}${e.halls.length?" · "+L("Hall","展馆")+" "+esc(e.halls.join(", ")):""}</span></li>`).join("");
-   empty.hidden=j.exhibitors.length>0;dir.hidden=false}catch{}};
-  let t;search.addEventListener("input",()=>{clearTimeout(t);t=setTimeout(load,250)});cat.addEventListener("change",load);load()}
-
  // FR-013: published news with date and simple pagination.
  const news=document.querySelector("[data-news-list]");
  if(news&&!onPreview){(async()=>{try{const r=await fetch(`${api}/content?kind=NEWS&locale=${lang}`);if(!r.ok)return;const {items}=await r.json();if(!items.length)return;
@@ -129,7 +127,11 @@
   document.querySelectorAll("[data-cms-f]").forEach(node=>{const v=fields[node.dataset.cmsF];if(!v)return;
    if(node.tagName==="IMG"){if(cmsSafe(v.src)){node.src=cmsSafe(v.src);node.removeAttribute("srcset")}if(typeof v.alt==="string")node.alt=v.alt;return}
    if(typeof v.text==="string"){const mode=v.mode||"plain";
-    if(mode==="rich")node.replaceChildren(cmsRich(v.text));
+    if(mode==="rich"){if(node.classList.contains("industry-card-copy")){
+      const parts=v.text.match(/^\*\*([^*]+)\*\*(.*)$/s);
+      if(parts){const strong=document.createElement("strong"),small=document.createElement("small");strong.textContent=parts[1];small.textContent=parts[2].trim();node.replaceChildren(strong,small)}
+      else node.replaceChildren(cmsRich(v.text));
+     }else node.replaceChildren(cmsRich(v.text));}
     else if(mode==="own"){const ts=[...node.childNodes].filter(n=>n.nodeType===3&&/[\p{L}\p{N}]/u.test(n.nodeValue));if(ts.length){const lead=ts[0].nodeValue.match(/^\s*/)[0],trail=ts[0].nodeValue.match(/\s*$/)[0];ts[0].nodeValue=lead+v.text+trail;ts.slice(1).forEach(n=>n.nodeValue=" ")}}
     else node.textContent=v.text}
    if(node.tagName==="A"&&cmsSafe(v.href))node.setAttribute("href",cmsSafe(v.href))})};
