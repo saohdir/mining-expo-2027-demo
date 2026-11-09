@@ -1,0 +1,103 @@
+/* IMDX 2027 / Exhibitors — five outcomes to exhibit, inspired by the editorial structure
+   of Mining Indonesia's Why Exhibit page (original text/graphics, IMDX brand tokens).
+   No other pages or existing CMS block keys are restyled here. */
+.interior-exhibitors .imdx-exhibitor-page-nav{
+  position:sticky;top:85px;z-index:15;display:flex;align-items:center;gap:8px;
+  overflow-x:auto;scrollbar-width:thin;max-width:100%;
+  margin:0 0 clamp(24px,4vw,48px);padding:10px 12px;
+  border:1px solid #ecd5c2;border-radius:14px;background:rgba(255,253,251,.97);
+  box-shadow:0 12px 30px rgba(82,15,0,.055);backdrop-filter:blur(14px)
+}
+.interior-exhibitors .imdx-exhibitor-page-nav a{
+  flex:none;border-radius:9px;padding:10px 15px;font-size:13px;font-weight:600;
+  color:#88584b;line-height:1.15;transition:background .2s,color .2s
+}
+.interior-exhibitors .imdx-exhibitor-page-nav a:hover,
+.interior-exhibitors .imdx-exhibitor-page-nav a[aria-current=location]{
+  background:#520f00;color:#fff
+}
+.interior-exhibitors .imdx-exhibitor-page-nav a:focus-visible{
+  outline:3px solid #c2410c;outline-offset:3px
+}
+.interior-exhibitors :is(#exhibitors,#business-benefits,#strategic-partnerships,#sectors){
+  scroll-margin-top:155px
+}
+.interior-exhibitors .exhibitor-feature{margin:0 0 clamp(62px,9vw,112px)}
+.interior-exhibitors .imdx-exhibitor-benefits{margin:0 0 clamp(60px,9vw,110px)}
+.interior-exhibitors .imdx-benefits-top{
+  display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr);
+  gap:clamp(24px,5vw,72px);align-items:end;margin:0 0 clamp(24px,4vw,44px)
+}
+.interior-exhibitors .imdx-benefits-head .eyebrow{
+  display:block;color:#c2410c;font-size:12px;font-weight:700;letter-spacing:.13em;margin-bottom:16px
+}
+.interior-exhibitors .imdx-benefits-head h2{
+  font-weight:500;font-size:clamp(40px,5vw,75px);line-height:1.02;letter-spacing:-.055em;margin:0
+}
+.interior-exhibitors .imdx-benefits-head h2 em{font-weight:400;color:#c2410c}
+.interior-exhibitors .imdx-benefits-top>p{max-width:350px;margin:0 0 6px;color:#88584b;font-size:16px;line-height:1.75}
+.interior-exhibitors .imdx-benefit-grid{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;
+  list-style:none;margin:0;padding:0
+}
+.interior-exhibitors .imdx-benefit-card{
+  position:relative;min-width:0;min-height:278px;overflow:hidden;
+  display:flex;flex-direction:column;align-items:stretch;gap:16px;
+  border:1px solid #ecd5c2;border-radius:20px;
+  background:#fffdfb;padding:clamp(23px,3vw,33px);
+  box-shadow:0 6px 22px rgba(82,15,0,.035);transition:transform .2s,border-color .2s,box-shadow .2s
+}
+.interior-exhibitors .imdx-benefit-card:hover{
+  transform:translateY(-4px);border-color:#c2410c;box-shadow:0 16px 38px rgba(82,15,0,.09)
+}
+.interior-exhibitors .imdx-benefit-featured{
+  grid-column:span 2;background:#520f00;color:#fff;border-color:#520f00;
+  background-image:radial-gradient(circle at 93% 0%,rgba(242,128,65,.26),transparent 50%),
+    linear-gradient(130deg,#520f00,#371007 75%)
+}
+.interior-exhibitors .imdx-benefit-featured:hover{border-color:#c2410c}
+.interior-exhibitors .imdx-benefit-card-top{
+  display:flex;align-items:start;justify-content:space-between;gap:16px;margin-bottom:auto
+}
+.interior-exhibitors .imdx-benefit-icon{
+  display:grid;place-items:center;width:62px;height:62px;border-radius:16px;
+  color:#c2410c;background:#f9f0e2
+}
+.interior-exhibitors .imdx-benefit-icon svg{width:33px;height:33px;overflow:visible}
+.interior-exhibitors .imdx-benefit-featured .imdx-benefit-icon{background:rgba(255,255,255,.12);color:#fff}
+.interior-exhibitors .imdx-benefit-counter{
+  color:#ad7766;font-size:11px;line-height:1.5;letter-spacing:.12em;font-weight:700
+}
+.interior-exhibitors .imdx-benefit-featured .imdx-benefit-counter{color:#f2c7b8}
+.interior-exhibitors .imdx-benefit-card h3{
+  font-size:clamp(21px,2.15vw,31px);letter-spacing:-.038em;line-height:1.12;font-weight:600;
+  margin:8px 0 0;max-width:22ch
+}
+.interior-exhibitors .imdx-benefit-featured h3{max-width:24ch;font-size:clamp(27px,3.2vw,43px)}
+.interior-exhibitors .imdx-benefit-card p{
+  color:#88584b;font-size:14px;line-height:1.65;margin:0;max-width:47ch
+}
+.interior-exhibitors .imdx-benefit-featured p{color:#f0cfc3;font-size:16px;max-width:55ch}
+.interior-exhibitors #strategic-partnerships{padding-top:clamp(20px,4vw,55px);border-top:1px solid #ecd5c2}
+.interior-exhibitors #strategic-partnerships .why-exhibit-head{margin-top:0}
+@media (max-width:980px){
+  .interior-exhibitors .imdx-benefit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .interior-exhibitors .imdx-benefits-top{grid-template-columns:1fr 1fr;gap:26px}
+}
+@media (max-width:700px){
+  .interior-exhibitors .imdx-exhibitor-page-nav{top:78px;padding:7px;margin-bottom:30px;gap:4px;border-radius:10px}
+  .interior-exhibitors .imdx-exhibitor-page-nav a{padding:10px 12px;font-size:12px}
+  .interior-exhibitors .exhibitor-feature{margin-bottom:64px}
+  .interior-exhibitors .imdx-benefits-top{grid-template-columns:1fr;gap:20px}
+  .interior-exhibitors .imdx-benefits-top>p{max-width:52ch}
+  .interior-exhibitors .imdx-benefit-grid{grid-template-columns:1fr;gap:12px}
+  .interior-exhibitors .imdx-benefit-featured{grid-column:auto}
+  .interior-exhibitors .imdx-benefit-card{min-height:225px;padding:23px}
+  .interior-exhibitors .imdx-benefit-card h3{font-size:25px}
+  .interior-exhibitors .imdx-benefit-featured h3{font-size:30px}
+}
+@media(prefers-reduced-motion:reduce){
+  .interior-exhibitors .imdx-benefit-card,
+  .interior-exhibitors .imdx-exhibitor-page-nav a{transition:none}
+  .interior-exhibitors .imdx-benefit-card:hover{transform:none}
+}
