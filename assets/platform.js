@@ -22,14 +22,9 @@
   [["en","EN","English"],["zh","中文","简体中文"]].forEach(([code,label,title])=>{const b=document.createElement("button");b.type="button";b.textContent=label;b.setAttribute("aria-pressed",String(code===lang));b.lang=code==="zh"?"zh-Hans":"en";b.title=title;
    b.addEventListener("click",()=>{try{localStorage.setItem("imdx-lang",code)}catch{}const u=new URL(location.href);u.searchParams.delete("lang");const base=enPath(u.pathname);u.pathname=code==="zh"?"/zh"+(base==="/"?"/":base):base;location.assign(u.toString())});w.append(b)});nav.append(w)})();
 
- // CR-LANG-01: page-title header of the inner pages (outside the CMS sections) in Chinese.
- if(lang==="zh"){const T={"HOME":"首页","ABOUT THE EXHIBITION":"关于展会","Event information":"展会信息","CONTACT US":"联系我们","Exhibition coordination":"展会联络",
-  "EXHIBITION SCOPE":"展览范围","Industry sectors":"行业领域","WHY EXHIBIT":"为何参展","Exhibitor information":"参展商信息","PHOTO & MOTION HIGHLIGHTS":"精彩图片与视频","EVENT HIGHLIGHT":"精彩回顾",
-  "Visual showcase":"视觉展示","EXHIBITION NEWS":"展会新闻","Updates and insights":"最新动态与洞察","ORGANIZERS & PARTNERS":"主办方与合作伙伴","Industry network":"行业网络",
-  "CONFERENCES & NETWORKING":"会议与商务交流","Business programme":"商务活动","THE VENUE":"展会场馆","Jakarta International Expo (JIEXPO), Kemayoran":"雅加达国际展览中心（JIEXPO），克玛约兰",
-  "VISITOR INFORMATION":"观众信息","Registration and entry":"登记与入场"};
-  document.querySelectorAll(".detail-intro").forEach(box=>{const w=document.createTreeWalker(box,NodeFilter.SHOW_TEXT);let n;while((n=w.nextNode())){const k=n.nodeValue.trim();if(T[k])n.nodeValue=n.nodeValue.replace(k,T[k])}});
-  const t=document.querySelector(".detail-intro h1");if(t&&document.title.includes(" — "))document.title=t.textContent.trim()+" — "+document.title.split(" — ").slice(1).join(" — ")}
+ // CR-LANG-01: compact page hero of the inner pages (outside the CMS sections) carries its Chinese text in data-zh.
+ if(lang==="zh"){document.querySelectorAll("[data-zh]").forEach(el=>{el.textContent=el.dataset.zh});
+  const t=document.querySelector(".page-hero h1");if(t&&document.title.includes(" — "))document.title=t.textContent.trim()+" — "+document.title.split(" — ").slice(1).join(" — ")}
 
  // Navbar "Visitor Registration" (owner request): signed-in customers go to the visitor tab of their account, everyone else to the floorplan.
  document.addEventListener("click",async e=>{const a=e.target.closest("a[data-visitor-registration]");if(!a||e.metaKey||e.ctrlKey||e.shiftKey||e.button)return;e.preventDefault();
