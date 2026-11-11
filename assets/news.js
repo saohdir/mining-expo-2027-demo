@@ -20,11 +20,9 @@
   // No cover image: a branded placeholder keeps the card layout intact.
   const image = (i, cls) => `<a class="${cls}${i.imageUrl ? "" : " news-cover--empty"}" href="${esc(articleHref(i.slug))}" tabindex="-1" aria-hidden="true">` +
     (i.imageUrl ? `<span class="icee-news-image" data-bg="${esc(i.imageUrl)}"></span>` : `<span class="icee-news-image"><b>IMDX</b><small>2027</small></span>`) + `</a>`;
-  const lead = i => `<article class="icee-news-lead news-card">${image(i, "news-cover")}<div class="icee-news-body"><span class="icee-news-label">${esc(label(i))}</span>
+  // Compact card for the home / news grid: same size for every article (fixed image ratio, title ≤3 lines, summary ≤2 lines).
+  const tile = i => `<article class="news-tile news-card">${image(i, "news-cover")}<div class="news-tile-body"><span class="icee-news-label">${esc(label(i))}</span>
     <h3><a href="${esc(articleHref(i.slug))}">${esc(i.title)}</a></h3>${i.summary ? `<p>${esc(i.summary)}</p>` : ""}<a class="news-more" href="${esc(articleHref(i.slug))}">${L("Read article", "阅读全文")} <span aria-hidden="true">↗</span></a></div></article>`;
-  const mini = i => `<article class="icee-news-mini news-card">${image(i, "news-cover")}<div><span class="icee-news-label">${esc(label(i))}</span>
-    <h3><a href="${esc(articleHref(i.slug))}">${esc(i.title)}</a></h3>${i.summary ? `<p>${esc(i.summary)}</p>` : ""}<a class="news-more" href="${esc(articleHref(i.slug))}">${L("Read article", "阅读全文")} <span aria-hidden="true">↗</span></a></div></article>`;
-
   /* Card grid with pagination: [data-news-grid data-page-size="3"] */
   document.querySelectorAll("[data-news-grid]").forEach(async grid => {
     if (offline) return;
@@ -40,8 +38,8 @@
     let page = 1;
     const render = (focus) => {
       const slice = items.slice((page - 1) * size, page * size);
-      grid.classList.toggle("is-single", slice.length === 1);
-      grid.innerHTML = lead(slice[0]) + (slice.length > 1 ? `<div class="icee-news-list">${slice.slice(1).map(mini).join("")}</div>` : "");
+      grid.classList.add("news-tiles");
+      grid.innerHTML = slice.map(tile).join("");
       setBg(grid);
       if (pages < 2) { pager.hidden = true; return; }
       const btn = (p, text, aria, disabled) => `<button type="button" data-page="${p}" ${disabled ? "disabled" : ""} aria-label="${esc(aria)}"${p === page && /^\d+$/.test(text) ? ' aria-current="page"' : ""}>${text}</button>`;
@@ -114,7 +112,7 @@
       ${item.imageUrl ? `<figure class="news-article-cover"><img src="${esc(item.imageUrl)}" alt="${esc(item.altText || "")}" width="1600" height="900" decoding="async"></figure>` : ""}
       <div class="news-article-body">${blocks || (item.summary ? `<p>${esc(item.summary)}</p>` : "")}
         <div class="news-article-actions"><a class="btn btn-orange" href="${root}/news/">${L("All updates", "全部动态")} <span>↗</span></a><button type="button" class="btn news-btn-secondary" data-action="exhibitor">${L("Join as Exhibitor", "参展商报名")} <span>↗</span></button></div></div>
-      ${more.length ? `<section class="news-more-list" aria-labelledby="more-h"><h2 id="more-h">${L("More updates", "更多动态")}</h2><div class="news-more-grid">${more.map(mini).join("")}</div></section>` : ""}`;
+      ${more.length ? `<section class="news-more-list" aria-labelledby="more-h"><h2 id="more-h">${L("More updates", "更多动态")}</h2><div class="news-more-grid">${more.map(tile).join("")}</div></section>` : ""}`;
     setBg(art); art.removeAttribute("aria-busy");
   })();
 })();
