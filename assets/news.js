@@ -23,6 +23,47 @@
   // Compact card for the home / news grid: same size for every article (fixed image ratio, title ≤3 lines, summary ≤2 lines).
   const tile = i => `<article class="news-tile news-card">${image(i, "news-cover")}<div class="news-tile-body"><span class="icee-news-label">${esc(label(i))}</span>
     <h3><a href="${esc(articleHref(i.slug))}">${esc(i.title)}</a></h3>${i.summary ? `<p>${esc(i.summary)}</p>` : ""}<a class="news-more" href="${esc(articleHref(i.slug))}">${L("Read article", "阅读全文")} <span aria-hidden="true">↗</span></a></div></article>`;
+  /* Home carousel: [data-news-carousel]. The active article is large in the centre, its neighbours smaller at the sides
+     (cut off by the page edge); round arrows + "01 / 10" counter, loops, swipe and arrow keys. A side card click brings
+     it to the centre; the centre card opens the article. */
+  document.querySelectorAll("[data-news-carousel]").forEach(async box => {
+    if (offline) return;
+    let items;
+    try { items = await news(zh ? "zh" : "en"); } catch { return; }
+    if (!items.length) return; // keep the designed fallback cards
+    const n = items.length, pad = k => String(k).padStart(2, "0");
+    box.className = "news-carousel"; box.setAttribute("role", "region"); box.setAttribute("aria-roledescription", L("carousel", "轮播"));
+    box.setAttribute("aria-label", L("Exhibition news", "展会新闻")); box.removeAttribute("aria-live");
+    box.innerHTML = `<div class="nc-track">${items.map((i, k) => `<article class="nc-slide news-card" role="group" aria-roledescription="${L("slide", "幻灯片")}" aria-label="${k + 1} / ${n}" data-k="${k}">
+      ${image(i, "news-cover")}<div class="nc-body"><h3><a href="${esc(articleHref(i.slug))}">${esc(i.title)}</a></h3>${i.publishedAt ? `<time datetime="${esc(i.publishedAt)}">${esc(day(i.publishedAt))}</time>` : ""}</div></article>`).join("")}</div>` +
+      (n > 1 ? `<div class="nc-controls"><button type="button" class="nc-prev" aria-label="${L("Previous article", "上一篇")}"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="nc-count" aria-hidden="true"></span><button type="button" class="nc-next" aria-label="${L("Next article", "下一篇")}"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>` : "") +
+      `<p class="news-sr" aria-live="polite"></p>`;
+    setBg(box);
+    const slides = [...box.querySelectorAll(".nc-slide")], count = box.querySelector(".nc-count"), live = box.querySelector(".news-sr");
+    let at = 0;
+    const show = (k, announce) => {
+      at = (k + n) % n;
+      slides.forEach((el, i) => {
+        let o = i - at; if (o > n / 2) o -= n; if (o < -n / 2) o += n; if (n === 2 && o === -1 && at === 0) o = 1;
+        el.style.setProperty("--o", String(o));
+        el.classList.toggle("is-active", o === 0); el.classList.toggle("is-side", Math.abs(o) === 1); el.classList.toggle("is-away", Math.abs(o) > 1);
+        el.setAttribute("aria-hidden", o === 0 ? "false" : "true");
+        el.querySelectorAll("a").forEach(a => { if (o === 0 && !a.classList.contains("news-cover")) a.removeAttribute("tabindex"); else a.setAttribute("tabindex", "-1"); });
+      });
+      if (count) count.textContent = pad(at + 1) + " / " + pad(n);
+      if (announce) live.textContent = items[at].title + " — " + (at + 1) + " / " + n;
+    };
+    box.querySelector(".nc-prev")?.addEventListener("click", () => show(at - 1, true));
+    box.querySelector(".nc-next")?.addEventListener("click", () => show(at + 1, true));
+    box.addEventListener("click", e => { const sl = e.target.closest(".nc-slide"); if (sl && !sl.classList.contains("is-active")) { e.preventDefault(); show(Number(sl.dataset.k), true); } });
+    box.addEventListener("keydown", e => { if (e.key === "ArrowLeft") { e.preventDefault(); show(at - 1, true); } if (e.key === "ArrowRight") { e.preventDefault(); show(at + 1, true); } });
+    let sx = null, sy = 0;
+    box.addEventListener("touchstart", e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, {passive: true});
+    box.addEventListener("touchend", e => { if (sx === null || n < 2) return; const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy; sx = null;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > 1.5 * Math.abs(dy)) show(at + (dx < 0 ? 1 : -1), true); }, {passive: true});
+    show(0, false);
+  });
+
   /* Card grid with pagination: [data-news-grid data-page-size="3"] */
   document.querySelectorAll("[data-news-grid]").forEach(async grid => {
     if (offline) return;
