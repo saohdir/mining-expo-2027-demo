@@ -60,6 +60,42 @@
     render(false);
   });
 
+  /* Article body. Block documents from the CMS editor ({"format":"blocks",…}: paragraph, heading, list, quote, image,
+     button, divider; inline **bold**, *italic*, [text](url)) — or the older plain text (blank line = paragraph,
+     "## " = subheading, "- " = bullet). Everything is escaped; only these marks become tags. */
+  const okHref = u => /^https:\/\/[^\s"'<>]+$/.test(u) || /^\/[A-Za-z0-9/_\-.%?=&#]*$/.test(u);
+  const inline = t => esc(t).replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (m, a, h) => okHref(h.replace(/&amp;/g, "&")) ? `<a href="${h}"${h.startsWith("http") ? ' target="_blank" rel="noopener"' : ""}>${a}</a>` : m)
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>").replace(/(^|[^*])\*([^*\n]+)\*/g, "$1<em>$2</em>").replace(/\n/g, "<br>");
+  const blockHtml = b => {
+    const s = v => typeof v === "string" ? v : "";
+    switch (b && b.t) {
+      case "p": return s(b.text).trim() ? `<p>${inline(s(b.text))}</p>` : "";
+      case "h": { const l = b.level === 3 ? 3 : 2; return `<h${l}>${esc(s(b.text))}</h${l}>`; }
+      case "list": { const items = (Array.isArray(b.items) ? b.items : []).filter(i => s(i).trim()); const tag = b.ordered ? "ol" : "ul"; return items.length ? `<${tag}>${items.map(i => `<li>${inline(s(i))}</li>`).join("")}</${tag}>` : ""; }
+      case "quote": return s(b.text).trim() ? `<blockquote><p>${inline(s(b.text))}</p>${b.cite ? `<cite>${esc(s(b.cite))}</cite>` : ""}</blockquote>` : "";
+      case "image": return okHref(s(b.url)) ? `<figure class="news-article-figure"><img src="${esc(s(b.url))}" alt="${esc(s(b.alt))}" loading="lazy" decoding="async">${b.caption ? `<figcaption>${inline(s(b.caption))}</figcaption>` : ""}</figure>` : "";
+      case "button": return okHref(s(b.url)) && s(b.text).trim() ? `<p class="news-article-cta"><a class="btn btn-orange" href="${esc(s(b.url))}"${s(b.url).startsWith("http") ? ' target="_blank" rel="noopener"' : ""}>${esc(s(b.text))} <span aria-hidden="true">↗</span></a></p>` : "";
+      case "divider": return "<hr>";
+      default: return "";
+    }
+  };
+  const bodyHtml = body => {
+    const text = String(body || "");
+    if (text.trimStart().startsWith('{"format":"blocks"')) { try { const d = JSON.parse(text); if (Array.isArray(d.blocks)) return d.blocks.map(blockHtml).join(""); } catch { /* fall back to plain text */ } }
+    const out = []; let para = [], bullets = [];
+    const flush = () => { if (para.length) out.push(`<p>${para.map(esc).join("<br>")}</p>`); if (bullets.length) out.push(`<ul>${bullets.map(l => `<li>${esc(l)}</li>`).join("")}</ul>`); para = []; bullets = []; };
+    for (const raw of text.replace(/\r/g, "").split("\n")) {
+      const line = raw.trim();
+      if (!line) { flush(); continue; }
+      if (line.startsWith("## ")) { flush(); out.push(`<h2>${esc(line.slice(3))}</h2>`); continue; }
+      if (/^[-•]\s+/.test(line)) { if (para.length) { out.push(`<p>${para.map(esc).join("<br>")}</p>`); para = []; } bullets.push(line.replace(/^[-•]\s+/, "")); continue; }
+      if (bullets.length) { out.push(`<ul>${bullets.map(l => `<li>${esc(l)}</li>`).join("")}</ul>`); bullets = []; }
+      para.push(line);
+    }
+    flush();
+    return out.join("");
+  };
+
   /* Article detail: [data-news-article] on /news/article/?slug=… */
   const art = document.querySelector("[data-news-article]");
   if (art) (async () => {
@@ -71,19 +107,7 @@
     if (!item) return notFound();
     document.title = item.title + " — IMDX 2027";
     const md = document.querySelector('meta[name="description"]'); if (md && item.summary) md.setAttribute("content", item.summary);
-    // Body: blank line = new paragraph, "## " = subheading, "- " = bullet list.
-    const out = []; let para = [], bullets = [];
-    const flush = () => { if (para.length) out.push(`<p>${para.map(esc).join("<br>")}</p>`); if (bullets.length) out.push(`<ul>${bullets.map(l => `<li>${esc(l)}</li>`).join("")}</ul>`); para = []; bullets = []; };
-    for (const raw of String(item.body || "").replace(/\r/g, "").split("\n")) {
-      const line = raw.trim();
-      if (!line) { flush(); continue; }
-      if (line.startsWith("## ")) { flush(); out.push(`<h2>${esc(line.slice(3))}</h2>`); continue; }
-      if (/^[-•]\s+/.test(line)) { if (para.length) { out.push(`<p>${para.map(esc).join("<br>")}</p>`); para = []; } bullets.push(line.replace(/^[-•]\s+/, "")); continue; }
-      if (bullets.length) { out.push(`<ul>${bullets.map(l => `<li>${esc(l)}</li>`).join("")}</ul>`); bullets = []; }
-      para.push(line);
-    }
-    flush();
-    const blocks = out.join("");
+    const blocks = bodyHtml(item.body);
     const more = list.filter(i => i.slug !== slug).slice(0, 3);
     art.innerHTML = `<nav class="breadcrumb news-crumb" aria-label="${L("Breadcrumb", "面包屑导航")}"><ol><li><a href="${root}/">${L("Home", "首页")}</a></li><li><a href="${root}/news/">${L("News", "新闻")}</a></li><li aria-current="page">${esc(item.title.slice(0, 60))}</li></ol></nav>
       <header class="news-article-head"><span class="icee-news-label">${esc(label(item))}</span><h1>${esc(item.title)}</h1>${item.summary ? `<p class="news-article-lead">${esc(item.summary)}</p>` : ""}</header>
