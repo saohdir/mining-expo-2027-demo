@@ -68,14 +68,17 @@
   }catch{}
  };
  document.querySelectorAll("[data-cms-kind]").forEach(renderList);
- // Exhibitors › Exhibitor Downloads: each designed card links to the published CMS download whose title or slug contains
- // its keyword (Website content › Downloads, e.g. "Exhibition Brochure", "Exhibitor Invitation"); otherwise "Coming soon".
- const dlCards=[...document.querySelectorAll("a[data-download-match]")];
- if(dlCards.length){const label=a=>a.querySelector("span");dlCards.forEach(a=>{label(a).textContent=L("Coming soon","即将发布")});
-  if(!onPreview)fetch(`${api}/content?kind=DOWNLOAD&locale=${lang}`).then(r=>r.ok?r.json():{items:[]}).then(({items})=>{
-   for(const a of dlCards){const m=a.dataset.downloadMatch,i=(items||[]).find(x=>x.url&&(x.title+" "+x.slug).toLowerCase().includes(m));if(!i)continue;
-    a.href=i.url;a.setAttribute("download","");a.removeAttribute("aria-disabled");label(a).textContent=L("Download PDF","下载PDF");
-    a.setAttribute("aria-label",L("Download ","下载 ")+i.title+(i.fileType?" ("+i.fileType+")":""))}}).catch(()=>{})}
+ // Exhibitors › Exhibitor Downloads: one card per file published in CMS › Website content › Downloads (nothing else);
+ // the section stays hidden while there is none.
+ const dlBox=document.querySelector("[data-xb-downloads]");
+ if(dlBox&&!onPreview)fetch(`${api}/content?kind=DOWNLOAD&locale=${lang}`).then(r=>r.ok?r.json():{items:[]}).then(({items})=>{
+  const list=(items||[]).filter(i=>i.url);if(!list.length)return;
+  const size=n=>n?(n>=1048576?(n/1048576).toFixed(1)+" MB":Math.max(1,Math.round(n/1024))+" KB"):"";
+  const dl='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19.5h14"/></svg>';
+  dlBox.innerHTML=list.map((i,n)=>{const type=(i.fileType||(String(i.url).match(/\.([a-z0-9]+)(?:$|\?)/i)||[])[1]||"").toUpperCase(),meta=[type,size(i.fileSizeBytes)].filter(Boolean).join(" · ");
+   return `<li><span class="xb-cover ${["is-brochure","is-invite","is-plan"][n%3]}" aria-hidden="true"><b>IMDX <i>2027</i></b><span class="xb-cover-title">${esc(i.title)}</span></span><div><h3>${esc(i.title)}</h3>${i.summary?`<p>${esc(i.summary)}</p>`:""}${meta?`<small class="xb-dl-meta">${esc(meta)}</small>`:""}`+
+    `<a class="xb-btn-o" href="${esc(i.url)}" download aria-label="${esc(L("Download ","下载 ")+i.title+(meta?" ("+meta+")":""))}">${dl}<span>${L(type==="PDF"?"Download PDF":"Download",type==="PDF"?"下载PDF":"下载")}</span></a></div></li>`}).join("");
+  dlBox.closest(".xb-dl-sec")?.classList.remove("is-empty")}).catch(()=>{});
 
  // FR-010/024/026/027: contact & partnership form → lead inbox (consent required, honeypot, server validation).
  const host=document.getElementById("imdx-contact-form");
