@@ -26,11 +26,6 @@
  if(lang==="zh"){document.querySelectorAll("[data-zh]").forEach(el=>{el.textContent=el.dataset.zh});
   const t=document.querySelector(".page-hero h1");if(t&&document.title.includes(" — "))document.title=t.textContent.trim()+" — "+document.title.split(" — ").slice(1).join(" — ")}
 
- // Navbar "Visitor Registration" (owner request): signed-in customers go to the visitor tab of their account, everyone else to the floorplan.
- document.addEventListener("click",async e=>{const a=e.target.closest("a[data-visitor-registration]");if(!a||e.metaKey||e.ctrlKey||e.shiftKey||e.button)return;e.preventDefault();
-  let signedIn=false;try{signedIn=(await fetch(api.replace(/\/public$/,"")+"/customer/me",{credentials:"same-origin",cache:"no-store"})).ok}catch{}
-  location.assign(signedIn?"/account?tab=visit":"/floorplan")});
-
  // FR-001: breadcrumb on inner pages (Home › Page).
  const main=document.querySelector("main");
  if(main&&location.pathname.replace(/\/$/,"")&&!document.querySelector("nav.breadcrumb")){const h=document.querySelector("main h1");if(h){const nav=document.createElement("nav");nav.className="breadcrumb container";nav.setAttribute("aria-label","Breadcrumb");
@@ -73,6 +68,14 @@
   }catch{}
  };
  document.querySelectorAll("[data-cms-kind]").forEach(renderList);
+ // Exhibitors › Exhibitor Downloads: each designed card links to the published CMS download whose title or slug contains
+ // its keyword (Website content › Downloads, e.g. "Exhibition Brochure", "Exhibitor Invitation"); otherwise "Coming soon".
+ const dlCards=[...document.querySelectorAll("a[data-download-match]")];
+ if(dlCards.length){const label=a=>a.querySelector("span");dlCards.forEach(a=>{label(a).textContent=L("Coming soon","即将发布")});
+  if(!onPreview)fetch(`${api}/content?kind=DOWNLOAD&locale=${lang}`).then(r=>r.ok?r.json():{items:[]}).then(({items})=>{
+   for(const a of dlCards){const m=a.dataset.downloadMatch,i=(items||[]).find(x=>x.url&&(x.title+" "+x.slug).toLowerCase().includes(m));if(!i)continue;
+    a.href=i.url;a.setAttribute("download","");a.removeAttribute("aria-disabled");label(a).textContent=L("Download PDF","下载PDF");
+    a.setAttribute("aria-label",L("Download ","下载 ")+i.title+(i.fileType?" ("+i.fileType+")":""))}}).catch(()=>{})}
 
  // FR-010/024/026/027: contact & partnership form → lead inbox (consent required, honeypot, server validation).
  const host=document.getElementById("imdx-contact-form");
