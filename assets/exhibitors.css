@@ -155,3 +155,10 @@
 .xb-cover-title{font-size:9px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.25;overflow-wrap:anywhere}
 .xb-dl-meta{display:block;margin:-6px 0 10px;color:#8a7468;font-size:12px}
 @media (max-width:900px){.xb-intro-photo{right:0;border-radius:28px 0 0 0}}
+/* Visitors › at a glance: link to the venue page */
+.vs-glance-cta{position:relative;z-index:1;width:min(640px,58%);padding:0 26px 22px}
+.vs-venue-btn{display:inline-flex;align-items:center;gap:10px;padding:10px 20px;border-radius:999px;background:linear-gradient(90deg,#c2410c,#ea6a1f);color:#fff;font-size:15px;font-weight:700;text-decoration:none;box-shadow:0 8px 18px rgba(194,65,12,.25);transition:transform .2s,box-shadow .2s}
+.vs-venue-btn:hover,.vs-venue-btn:focus-visible{transform:translateY(-1px);box-shadow:0 12px 24px rgba(194,65,12,.32)}
+.vs-venue-btn:focus-visible{outline:3px solid #fdba8c;outline-offset:3px}
+@media (max-width:900px){.vs-glance-cta{width:auto}}
+@media (max-width:600px){.vs-venue-btn{width:100%;justify-content:center}}

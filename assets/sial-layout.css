@@ -224,3 +224,7 @@ html{scroll-padding-top:118px}body{background:var(--offwhite)}.page-frame{overfl
 .cms-download .dl-text small{font-size:13px;color:var(--muted)}
 .cms-download .dl-action{grid-column:2;justify-self:start;font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--orange);white-space:nowrap}
 .cms-download .dl-action b{display:inline-grid;place-items:center;width:26px;height:26px;margin-left:4px;border-radius:50%;background:var(--orange);color:#fff;font-size:14px}
+/* Page banner photo is a real <img> (editable in CMS › Pages & layout › Page banner). */
+.page-hero{background-image:none}
+.page-hero-bg{position:absolute;inset:0;z-index:-2;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center var(--hero-pos,50%)}
+.page-hero--light .page-hero-bg{display:none}
