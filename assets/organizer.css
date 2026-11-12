@@ -1,10 +1,8 @@
 /* About the Organizer (owner brief, Nov 2026): light intro band, logo panel, one group-metrics strip, three concise
    cards, commitment banner, Why Indonesia. Uses the site tokens from base.css (--ink, --muted, --line, --orange, --warm). */
 .og2-sr{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.og2-hero .page-hero-inner{padding:22px 0 24px}
-.og2-hero .breadcrumb{margin:0 0 10px}
-.og2-hero h1{margin:0 0 8px;max-width:none;color:var(--ink);font-size:clamp(30px,3vw,42px)}
-.og2-hero .page-hero-sub{max-width:78ch;color:var(--muted);font-size:16px;line-height:1.6}
+/* Photo banner like the other pages (photo replaceable in CMS › Pages & layout › Page banner); intro kept short. */
+.og2-hero .page-hero-sub{max-width:78ch}
 .og2-sec{padding-top:clamp(24px,3vw,36px)}
 .og2-why{padding-bottom:clamp(44px,5vw,72px)}
 /* B. logo panel */
