@@ -26,11 +26,6 @@
  if(lang==="zh"){document.querySelectorAll("[data-zh]").forEach(el=>{el.textContent=el.dataset.zh});
   const t=document.querySelector(".page-hero h1");if(t&&document.title.includes(" — "))document.title=t.textContent.trim()+" — "+document.title.split(" — ").slice(1).join(" — ")}
 
- // Navbar "Visitor Registration" (owner request): signed-in customers go to the visitor tab of their account, everyone else to the floorplan.
- document.addEventListener("click",async e=>{const a=e.target.closest("a[data-visitor-registration]");if(!a||e.metaKey||e.ctrlKey||e.shiftKey||e.button)return;e.preventDefault();
-  let signedIn=false;try{signedIn=(await fetch(api.replace(/\/public$/,"")+"/customer/me",{credentials:"same-origin",cache:"no-store"})).ok}catch{}
-  location.assign(signedIn?"/account?tab=visit":"/floorplan")});
-
  // FR-001: breadcrumb on inner pages (Home › Page).
  const main=document.querySelector("main");
  if(main&&location.pathname.replace(/\/$/,"")&&!document.querySelector("nav.breadcrumb")){const h=document.querySelector("main h1");if(h){const nav=document.createElement("nav");nav.className="breadcrumb container";nav.setAttribute("aria-label","Breadcrumb");
