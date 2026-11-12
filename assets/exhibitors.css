@@ -142,3 +142,16 @@
   .vs-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
   .vs-plan .vs-btn{width:100%;justify-content:center}
 }
+
+/* Nov 2026 follow-up: intro photo ends at the content edge (aligned with the cards below), photo cards, CMS-only downloads. */
+.xb-intro-photo{right:max(var(--space,24px),calc((100% - 1280px) / 2));border-radius:42px 18px 18px 18px}
+.xb-why-cards li{flex-direction:column;gap:0;padding:0;overflow:hidden}
+.xb-why-cards li img{display:block;width:100%;height:auto;aspect-ratio:16/8.5;object-fit:cover}
+.xb-why-cards li>div{padding:18px 20px 22px}
+.xb-scope-cards li{flex-direction:column;gap:0;padding:0;overflow:hidden}
+.xb-scope-cards li img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.xb-scope-cards li>div{padding:14px 16px 18px}
+.xb-dl-sec.is-empty{display:none}
+.xb-cover-title{font-size:9px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.25;overflow-wrap:anywhere}
+.xb-dl-meta{display:block;margin:-6px 0 10px;color:#8a7468;font-size:12px}
+@media (max-width:900px){.xb-intro-photo{right:0;border-radius:28px 0 0 0}}
