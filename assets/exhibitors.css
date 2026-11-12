@@ -81,3 +81,64 @@
   .xb-reserve{grid-template-columns:1fr}.xb-reserve-points{border-left:0;padding-left:0}
 }
 @media (max-width:600px){.xb-scope-cards{grid-template-columns:1fr}.xb-btn{width:100%;justify-content:center}.xb-intro-photo{height:220px;border-radius:28px 0 0 0}}
+
+/* Visitors page (owner mockup, Nov 2026) — shares the exhibitors tokens/blocks above. */
+.vs-btn{margin-top:26px;border:0;cursor:pointer;font:inherit;font-size:16px;padding:13px 24px;gap:10px}
+.vs-btn span{font-weight:700}
+.vs-glance-wrap{padding-top:clamp(28px,3.5vw,44px)}
+.vs-glance{position:relative;display:block;background:#fff;border:1px solid var(--xb-line);border-radius:16px;box-shadow:0 10px 28px rgba(80,32,12,.06);overflow:hidden}
+.vs-glance-facts{position:relative;z-index:1;width:min(640px,58%);list-style:none;margin:0;padding:22px 26px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.vs-glance-facts li{display:flex;gap:16px;align-items:center;color:var(--orange)}
+.vs-glance-facts li+li{padding-left:20px;border-left:2px solid #e4cfc2}
+.vs-glance-facts strong{display:block;color:var(--xb-ink);font-size:clamp(18px,1.6vw,22px);font-weight:700;line-height:1.2}
+.vs-glance-facts span{display:block;margin-top:4px;color:var(--xb-text);font-size:13.5px}
+.vs-glance-img{position:absolute;top:0;right:0;bottom:0;width:50%;height:100%;max-width:none;object-fit:cover;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 30%);mask-image:linear-gradient(90deg,transparent 0%,#000 30%)}
+.vs-why{padding-top:clamp(36px,4.5vw,56px)}
+.vs-why-cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.vs-why-cards li{background:#fff;border:1px solid var(--xb-line);border-radius:14px;overflow:hidden;box-shadow:0 10px 26px rgba(80,32,12,.05)}
+.vs-why-cards img{display:block;width:100%;height:auto;aspect-ratio:16/8.5;object-fit:cover}
+.vs-why-cards div{padding:16px 18px 20px}
+.vs-why-cards h3{margin:0 0 8px;font-size:clamp(17px,1.4vw,20px);font-weight:700;line-height:1.2}
+.vs-why-cards p{margin:0;color:var(--xb-text);font-size:14px;line-height:1.5}
+.vs-scope{padding-top:clamp(40px,5vw,60px)}
+.vs-tiles{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:10px}
+.vs-tiles li{position:relative;aspect-ratio:3/3.4;border-radius:12px;overflow:hidden;background:#3d1308;isolation:isolate}
+.vs-tiles img{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover}
+.vs-tiles li::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(20,8,4,.82) 100%)}
+.vs-tiles span{position:absolute;left:12px;right:10px;bottom:12px;color:#fff;font-size:clamp(13px,1.15vw,16px);font-weight:700;line-height:1.2;text-shadow:0 1px 6px rgba(0,0,0,.5)}
+.vs-faq-sec{padding-top:clamp(40px,5vw,64px);padding-bottom:clamp(48px,6vw,80px)}
+.vs-faq{display:grid;grid-template-columns:minmax(240px,.8fr) minmax(0,1.6fr);gap:clamp(24px,4vw,56px);align-items:start}
+.vs-faq-head h2{margin:0 0 16px;font-size:clamp(32px,3.2vw,46px);line-height:1.08;font-weight:700}
+.vs-faq-head p{margin:0;color:var(--xb-text);font-size:16px;line-height:1.6}
+.vs-faq-list{display:grid;gap:8px}
+.vs-faq-list details{background:#fff;border:1px solid var(--xb-line);border-radius:12px;overflow:hidden}
+.vs-faq-list details[open]{background:linear-gradient(90deg,#fff6ef,#fff);border-color:#f6c9a8;box-shadow:0 8px 22px rgba(80,32,12,.06)}
+.vs-faq-list summary{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 20px;cursor:pointer;list-style:none;color:var(--xb-ink);font-size:16px;font-weight:700}
+.vs-faq-list summary::-webkit-details-marker{display:none}
+.vs-faq-list summary svg{flex:0 0 auto;transition:transform .2s;color:var(--xb-ink)}
+.vs-faq-list details[open] summary svg{transform:rotate(180deg);color:var(--orange)}
+.vs-faq-list summary:focus-visible{outline:3px solid #fdba8c;outline-offset:-3px}
+.vs-faq-list details p{margin:0;padding:0 20px 16px;color:var(--xb-text);font-size:15px;line-height:1.6}
+.vs-faq-link{margin-left:6px;color:var(--orange);font-weight:700;text-decoration:none;white-space:nowrap}
+.vs-faq-link:hover,.vs-faq-link:focus-visible{text-decoration:underline}
+.vs-plan{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr) auto;gap:clamp(18px,3vw,40px);align-items:center;margin-top:clamp(36px,4vw,52px);padding:clamp(22px,3vw,34px) clamp(22px,3.5vw,44px);background:linear-gradient(90deg,#fff6ef,#fdeee2);border-radius:20px}
+.vs-plan h2{margin:0;padding-right:clamp(16px,3vw,40px);border-right:2px solid #e4cfc2;font-size:clamp(28px,2.8vw,40px);line-height:1.08;font-weight:700}
+.vs-plan h2 em{display:block}
+.vs-plan p{margin:0;color:var(--xb-text);font-size:15.5px;line-height:1.6}
+.vs-plan .vs-btn{margin-top:0;white-space:nowrap}
+@media (max-width:1100px){
+  .vs-why-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .vs-tiles{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .vs-plan{grid-template-columns:1fr 1fr}.vs-plan .vs-btn{grid-column:1/-1;justify-self:start}
+}
+@media (max-width:900px){
+  .vs-glance-facts{width:auto}.vs-glance-img{position:static;display:block;width:100%;height:140px;-webkit-mask-image:none;mask-image:none}
+  .vs-faq{grid-template-columns:1fr}
+  .vs-plan{grid-template-columns:1fr}.vs-plan h2{border-right:0;padding-right:0}
+}
+@media (max-width:600px){
+  .vs-glance-facts{grid-template-columns:1fr}.vs-glance-facts li+li{padding-left:0;border-left:0;padding-top:16px;border-top:2px solid #f1e2d8}
+  .vs-why-cards{grid-template-columns:1fr}
+  .vs-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .vs-plan .vs-btn{width:100%;justify-content:center}
+}
