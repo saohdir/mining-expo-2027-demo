@@ -184,12 +184,13 @@
   const container=document.querySelector("main")||document.body;
   const listed=new Set();
   for(const b of layout.blocks){
-   if(b.type==="static"){const node=document.querySelector(`[data-cms-block="${CSS.escape(b.ref)}"]`);if(!node)continue;listed.add(node);node.hidden=!!b.hidden;
+   if(b.type==="static"){const node=document.querySelector(`[data-cms-block="${CSS.escape(b.ref)}"]`);if(!node||node.hasAttribute("data-cms-fixed"))continue;listed.add(node);node.hidden=!!b.hidden;
     if(node.hidden)node.style.display="none";else node.style.removeProperty("display");
     if(node.parentElement===container||container.contains(node))container.append(node)}
    else if(!b.hidden)container.append(render(b));
   }
-  document.querySelectorAll("[data-cms-block]").forEach(n=>{if(!listed.has(n)){n.hidden=true;n.style.display="none"}});
+  // The page banner (data-cms-fixed) always stays first and visible; only its fields are edited in the CMS.
+  document.querySelectorAll("[data-cms-block]").forEach(n=>{if(!listed.has(n)&&!n.hasAttribute("data-cms-fixed")){n.hidden=true;n.style.display="none"}});
   const footerNodes=[...container.querySelectorAll(":scope > footer")];footerNodes.forEach(f=>container.append(f));
   document.documentElement.dataset.cmsLayout=preview?"draft":"published";
  })();
