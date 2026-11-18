@@ -42,7 +42,7 @@ html{scroll-padding-top:118px}body{background:var(--offwhite)}.page-frame{overfl
  .site-nav-shell .nav{min-height:76px;height:76px;padding:0;width:calc(100% - 38px)}.site-nav-shell .nav-toggle{display:flex;flex-direction:column;gap:5px;border:1px solid #f0d8c5;border-radius:4px;background:#fff;align-items:center;justify-content:center;width:43px;height:43px;flex-shrink:0;margin-left:auto}.site-nav-shell .nav-toggle span{display:block;width:19px;height:2px;background:var(--ink)}
  .site-nav-shell .nav-links{display:none;position:absolute;top:76px;left:-19px;right:-19px;min-height:auto;max-height:calc(100vh - 92px);overflow-y:auto;background:#fff;box-shadow:0 14px 35px rgba(30,18,10,.16);border-top:1px solid #eee1d6;padding:7px 16px 20px;margin:0;flex-direction:column;align-items:stretch;gap:0}.site-nav-shell .nav-links.open{display:flex}
  .nav-menu{display:block}.nav-menu>a,.nav-menu>button{min-height:51px;width:100%;text-align:left;justify-content:space-between;padding:11px 12px;border-bottom:1px solid #f0ebe7;font-size:14px}
- .nav-menu:hover .nav-dropdown,.nav-menu:focus-within .nav-dropdown{opacity:0;visibility:hidden;transform:none}.nav-menu.is-open .nav-dropdown{position:relative;top:auto;left:auto;min-width:0;max-width:none;display:flex;visibility:visible;opacity:1;transform:none;box-shadow:none;border-top:0;background:#fff9f4;padding:2px 8px 7px;margin:0 0 5px}.nav-menu.is-open .nav-dropdown a{padding:10px 17px;font-size:13px}.site-nav-shell .nav-login{margin:13px 10px 0;max-width:210px}
+ .nav-menu:hover .nav-dropdown,.nav-menu:focus-within .nav-dropdown{opacity:0;visibility:hidden;transform:none}.nav-menu.is-open .nav-dropdown{position:relative;top:auto;left:auto;min-width:0;max-width:none;display:flex;visibility:visible;opacity:1;transform:none;box-shadow:none;border-top:0;background:#fff9f4;padding:2px 8px 7px;margin:0 0 5px}.nav-menu.is-open .nav-dropdown a{padding:10px 17px;font-size:13px}.site-nav-shell .nav-login{margin:14px 0 0;width:100%;max-width:none;min-height:48px;justify-content:center;text-align:center;font-size:13px;box-sizing:border-box}
  .hero-shell{margin:9px 12px 0}.hero-shell .hero-grid{min-height:630px}.detail-intro{padding:42px 0 15px}.venue-detail-top{grid-template-columns:1fr;gap:24px}.venue-detail-top .venue-visual{max-height:280px}.venue-map-band{padding:30px var(--space) 40px;grid-template-columns:1fr;gap:24px}.venue-map-frame{height:330px}
 }
 @media (max-width:560px){.site-nav-shell .brand-type strong{font-size:22px}.site-nav-shell .brand-type small{font-size:6px}.site-nav-shell .brand-mark{width:40px;height:40px}.detail-intro h1{font-size:42px}.venue-detail-main h2{font-size:24px}.venue-detail-top .venue-visual{min-height:235px;height:235px}.venue-map-frame{height:300px}.venue-detail-main .lead{font-size:20px}}
@@ -228,6 +228,14 @@ html{scroll-padding-top:118px}body{background:var(--offwhite)}.page-frame{overfl
 .page-hero{background-image:none}
 .page-hero-bg{position:absolute;inset:0;z-index:-2;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center var(--hero-pos,50%)}
 .page-hero--light .page-hero-bg{display:none}
+/* Mobile header: EN / 中文 sits beside the hamburger, outside the drawer (platform.js moves .lang-switch). */
+@media (max-width:850px){
+ .site-nav-shell .nav>.lang-switch{margin:0 8px 0 auto;flex-shrink:0;gap:4px}
+ .site-nav-shell .nav>.lang-switch button{min-width:40px;height:36px;padding:0 9px;font-size:13px;font-weight:600;border:1px solid #f0d8c5;border-radius:4px;color:var(--ink);background:#fff}
+ .site-nav-shell .nav>.lang-switch button[aria-pressed=true]{background:var(--orange);border-color:var(--orange);color:#fff}
+ .site-nav-shell .nav>.lang-switch+.nav-toggle{margin-left:0}
+}
+@media (max-width:380px){.site-nav-shell .official-brand-logo{width:118px;height:45px}.site-nav-shell .nav>.lang-switch{margin-right:6px}.site-nav-shell .nav>.lang-switch button{min-width:36px;padding:0 7px}}
 /* Footer: company address, social links (URLs set in CMS) and the three official WeChat QR codes. */
 .footer-info{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:clamp(24px,4vw,64px);padding:30px 0;margin-top:28px;border-top:1px solid var(--line)}
 .footer-contact{display:grid;gap:24px;align-content:start}

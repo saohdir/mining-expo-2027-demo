@@ -20,7 +20,10 @@
   if(zhPath)document.querySelectorAll('a[href^="/"]').forEach(a=>{const h=a.getAttribute("href");if(!/^\/(zh|api|account|admin|floorplan|conferences|assets)(\/|$)/.test(h))a.setAttribute("href","/zh"+h)})}
  (()=>{const nav=document.getElementById("navLinks");if(!nav||document.querySelector(".lang-switch"))return;const w=document.createElement("div");w.className="lang-switch";w.setAttribute("role","group");w.setAttribute("aria-label",L("Language","语言"));
   [["en","EN","English"],["zh","中文","简体中文"]].forEach(([code,label,title])=>{const b=document.createElement("button");b.type="button";b.textContent=label;b.setAttribute("aria-pressed",String(code===lang));b.lang=code==="zh"?"zh-Hans":"en";b.title=title;
-   b.addEventListener("click",()=>{try{localStorage.setItem("imdx-lang",code)}catch{}const u=new URL(location.href);u.searchParams.delete("lang");const base=enPath(u.pathname);u.pathname=code==="zh"?"/zh"+(base==="/"?"/":base):base;location.assign(u.toString())});w.append(b)});nav.append(w)})();
+   b.addEventListener("click",()=>{try{localStorage.setItem("imdx-lang",code)}catch{}const u=new URL(location.href);u.searchParams.delete("lang");const base=enPath(u.pathname);u.pathname=code==="zh"?"/zh"+(base==="/"?"/":base):base;location.assign(u.toString())});w.append(b)});
+  // Mobile: keep EN / 中文 in the always-visible header next to the hamburger (not inside the drawer); desktop keeps it at the end of the links.
+  const mq=window.matchMedia("(max-width: 850px)"),toggle=document.getElementById("navToggle");
+  const place=()=>{if(mq.matches&&toggle)toggle.before(w);else nav.append(w)};place();mq.addEventListener?.("change",place)})();
 
  // CR-LANG-01: compact page hero of the inner pages (outside the CMS sections) carries its Chinese text in data-zh.
  if(lang==="zh"){document.querySelectorAll("[data-zh]").forEach(el=>{el.textContent=el.dataset.zh});
