@@ -56,9 +56,11 @@
  // Downloads: a file card with a PDF / document icon so it is obvious the file can be downloaded.
  const fileExt=i=>{const t=String(i.fileType||"").toUpperCase().replace(/^.*\//,"");const fromUrl=(String(i.url||"").split("?")[0].match(/\.([a-z0-9]{2,5})$/i)||[])[1];return (t==="APPLICATION/PDF"?"PDF":t)||(fromUrl||"FILE").toUpperCase()};
  const fileIcon=ext=>`<svg class="dl-icon" viewBox="0 0 40 48" aria-hidden="true" focusable="false"><path d="M6 1h20l13 13v29a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V5a4 4 0 0 1 4-4z" fill="#fff" stroke="currentColor" stroke-width="2"/><path d="M26 1v9a4 4 0 0 0 4 4h9" fill="none" stroke="currentColor" stroke-width="2"/><rect x="0" y="25" width="30" height="14" rx="3" fill="currentColor"/><text x="15" y="35.5" text-anchor="middle" font-size="9" font-weight="700" fill="#fff" font-family="Arial,sans-serif">${esc(ext.slice(0,4))}</text></svg>`;
+ // Owner prompt 04: CMS-uploaded files are saved under the document title (server sends Content-Disposition with it).
+ const dlHref=u=>/^\/api\/public\/media\/[0-9a-f-]{36}\.pdf$/.test(String(u))?u+"?download=1"+(lang==="zh"?"&lang=zh":""):u;
  const downloadItem=i=>{const ext=fileExt(i),size=i.fileSizeBytes?(i.fileSizeBytes>=1048576?(i.fileSizeBytes/1048576).toFixed(1)+" MB":Math.max(1,Math.round(i.fileSizeBytes/1024))+" KB"):"";
   const meta=[ext,size,L("Updated","更新于")+" "+new Date(i.updatedAt).toLocaleDateString(lang==="zh"?"zh-CN":"en-GB",{timeZone:"Asia/Jakarta"})].filter(Boolean).join(" · ");
-  return `<li class="cms-download${ext==="PDF"?" is-pdf":""}"><a href="${esc(i.url)}" download aria-label="${esc(L("Download","下载")+" "+i.title+" ("+[ext,size].filter(Boolean).join(", ")+")")}">${fileIcon(ext)}<span class="dl-text"><strong>${esc(i.title)}</strong><small>${esc(meta)}</small></span><span class="dl-action" aria-hidden="true">${L("Download","下载")} <b>↓</b></span></a></li>`};
+  return `<li class="cms-download${ext==="PDF"?" is-pdf":""}"><a href="${esc(dlHref(i.url))}" download aria-label="${esc(L("Download","下载")+" "+i.title+" ("+[ext,size].filter(Boolean).join(", ")+")")}">${fileIcon(ext)}<span class="dl-text"><strong>${esc(i.title)}</strong><small>${esc(meta)}</small></span><span class="dl-action" aria-hidden="true">${L("Download","下载")} <b>↓</b></span></a></li>`};
  const renderList=async box=>{
   if(onPreview)return;
   try{const r=await fetch(`${api}/content?kind=${encodeURIComponent(box.dataset.cmsKind)}&locale=${lang}`);if(!r.ok)return;const {items}=await r.json();if(!items?.length)return;
@@ -80,7 +82,7 @@
   const dl='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19.5h14"/></svg>';
   dlBox.innerHTML=list.map((i,n)=>{const type=(i.fileType||(String(i.url).match(/\.([a-z0-9]+)(?:$|\?)/i)||[])[1]||"").toUpperCase(),meta=[type,size(i.fileSizeBytes)].filter(Boolean).join(" · ");
    return `<li><span class="xb-cover ${["is-brochure","is-invite","is-plan"][n%3]}" aria-hidden="true"><b>IMDX <i>2027</i></b><span class="xb-cover-title">${esc(i.title)}</span></span><div><h3>${esc(i.title)}</h3>${i.summary?`<p>${esc(i.summary)}</p>`:""}${meta?`<small class="xb-dl-meta">${esc(meta)}</small>`:""}`+
-    `<a class="xb-btn-o" href="${esc(i.url)}" download aria-label="${esc(L("Download ","下载 ")+i.title+(meta?" ("+meta+")":""))}">${dl}<span>${L(type==="PDF"?"Download PDF":"Download",type==="PDF"?"下载PDF":"下载")}</span></a></div></li>`}).join("");
+    `<a class="xb-btn-o" href="${esc(dlHref(i.url))}" download aria-label="${esc(L("Download ","下载 ")+i.title+(meta?" ("+meta+")":""))}">${dl}<span>${L(type==="PDF"?"Download PDF":"Download",type==="PDF"?"下载PDF":"下载")}</span></a></div></li>`}).join("");
   dlBox.closest(".xb-dl-sec")?.classList.remove("is-empty")}).catch(()=>{});
 
  // FR-010/024/026/027: contact & partnership form → lead inbox (consent required, honeypot, server validation).
